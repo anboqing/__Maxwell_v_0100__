@@ -9,17 +9,20 @@
 #ifndef _MAXWELL_MUTEXLOCK_H_
 #define _MAXWELL_MUTEXLOCK_H_
 
-#include <pthread.h>
+#include "Log.hpp"
 #include "Uncopyable.h"
+
+#include <string.h>
 #include <iostream>
+#include <pthread.h>
 #include <cstdlib>
 
 class LockBase:public Uncopyable{
 public:
     LockBase(){}
     virtual ~LockBase(){}
-    virtual int lock(const int flag = _READLOCK) = 0;
-    virtual int unlock() = 0;
+    virtual void lock(const int flag = _READLOCK) = 0;
+    virtual void unlock() = 0;
 protected:
     enum{_READLOCK = 0,_WRITELOCK = 1};
 };
@@ -31,16 +34,33 @@ public:
     ~MutexLock(){
         pthread_mutex_destroy(&_mutex);
     }
-    int lock(const int flag = _READLOCK){
-        return  pthread_mutex_lock(&_mutex);
+    void lock(const int flag = _READLOCK){
+        int iret = pthread_mutex_lock(&_mutex);
+        if(iret!=0){
+            excuteError();
+        }
     }
-    int unlock(){
-        return pthread_mutex_unlock(&_mutex);
+    void unlock(){
+        int iret  = pthread_mutex_unlock(&_mutex);
+        if(iret!=0){
+            excuteError();
+        }
     }
-    int tryLock(){
-        return pthread_mutex_trylock(&_mutex);
+    void tryLock(){
+        int iret = pthread_mutex_trylock(&_mutex);
+        if(iret!=0){
+            excuteError();
+        }
+    }
+    pthread_mutex_t* getMutexPointer(){
+        return &_mutex;
     }
 private:
+    void excuteError(){
+        char *msg = strerror(errno);
+        LogError("%s",msg);
+        throw std::runtime_error(msg);
+    }
     pthread_mutex_t _mutex;
 };
 
@@ -52,30 +72,50 @@ public:
     ~RWLock(){
         pthread_rwlock_destroy(&_rw_lock);
     }
-    int lock(const int flag = _READLOCK){
+    void lock(const int flag = _READLOCK){
         if(flag==_READLOCK){
-            return readLock();
+            readLock();
         }else if(flag==_WRITELOCK){
-            return writeLock();
+            writeLock();
         }
-        return EXIT_FAILURE;
     }
-    int readLock(){
-        return pthread_rwlock_rdlock(&_rw_lock);
+    void readLock(){
+        int iret = pthread_rwlock_rdlock(&_rw_lock);
+        if(iret != 0){
+            excuteError();
+        }
     }
-    int writeLock(){
-        return pthread_rwlock_wrlock(&_rw_lock);
+    void writeLock(){
+        int iret = pthread_rwlock_wrlock(&_rw_lock);
+        if(iret != 0){
+            excuteError();
+        }
     }
-    int unlock(){
-        return pthread_rwlock_unlock(&_rw_lock);
+    void unlock(){
+        int iret = pthread_rwlock_unlock(&_rw_lock);
+        if(iret != 0){
+            excuteError();
+        }
     }
-    int tryReadLock(){
-        return pthread_rwlock_tryrdlock(&_rw_lock);
+    void tryReadLock(){
+        int iret = pthread_rwlock_tryrdlock(&_rw_lock);
+        if(iret !=0)
+        {
+            excuteError();
+        }
     }
-    int tryWriteLock(){
-        return pthread_rwlock_trywrlock(&_rw_lock);
+    void tryWriteLock(){
+        int iret = pthread_rwlock_trywrlock(&_rw_lock);
+        if(iret != 0){
+            excuteError();
+        }
     }
 private:
+    void excuteError(){
+        char *msg = strerror(errno);
+        LogError("%s",msg);
+        throw std::runtime_error(msg);
+    }
     pthread_rwlock_t _rw_lock;
 };
 
