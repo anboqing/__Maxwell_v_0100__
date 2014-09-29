@@ -55,8 +55,8 @@ Configure::Configure(const std::string& conf_file_name){
 Configure* Configure::getInstance(){
     if(_p_conf_instance == NULL){
         // 这是用RAII管理读写锁 防止忘记解锁 造成死锁 
-        // 参数 0 代表 加 读锁 1 加 写锁 由于大多是读取用，所以用读锁加锁
-        LockSafeGuard raii_locker(*_p_lock,0);
+        // 第二个参数 0 代表 加 读锁 1 加 写锁 ，默认是0 ，由于大多是读取用，所以用读锁加锁
+        LockSafeGuard raii_locker(*_p_lock);
         if(_p_conf_instance == NULL){
             // 这里写成固定的是迫不得已，以后再改
             _p_conf_instance = new Configure("/home/anboqing/Code/CASES/Maxwell/conf/config.dat");
