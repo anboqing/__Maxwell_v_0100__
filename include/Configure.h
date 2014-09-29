@@ -29,7 +29,7 @@ private:
 //    static std::shared_ptr<Configure *> _sp_conf_instance;
     static Configure* _p_conf_instance;
     // 用来保证线程安全
-    static MutexLock* _p_lock;
+    static LockBase* _p_lock;
     // 按照文件名读取配置文件的函数
     bool _loadConfigFile(const std::string& conf_file_name);
 };

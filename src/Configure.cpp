@@ -15,8 +15,10 @@
 
 using namespace std;
 
+//初始化静态常量
 Configure* Configure::_p_conf_instance = NULL;
-MutexLock* Configure::_p_lock = new MutexLock();
+
+LockBase* Configure::_p_lock = new RWLock();
 
 bool Configure::_loadConfigFile(const string& filename){
     //打开文件流
@@ -36,7 +38,6 @@ bool Configure::_loadConfigFile(const string& filename){
         }
         string key,value;
         line_stream >> key >> value;
-        //LogInfo("%s%s",key.c_str(),value.c_str());
         //将读取的键值对保存在map容器中
         _conf_map[key] = value;
     }
@@ -53,7 +54,9 @@ Configure::Configure(const std::string& conf_file_name){
 
 Configure* Configure::getInstance(){
     if(_p_conf_instance == NULL){
-        Lock raii_locker(*_p_lock);
+        // 这是用RAII管理读写锁 防止忘记解锁 造成死锁 
+        // 参数 0 代表 加 读锁 1 加 写锁 由于大多是读取用，所以用读锁加锁
+        LockSafeGuard raii_locker(*_p_lock,0);
         if(_p_conf_instance == NULL){
             // 这里写成固定的是迫不得已，以后再改
             _p_conf_instance = new Configure("/home/anboqing/Code/CASES/Maxwell/conf/config.dat");
