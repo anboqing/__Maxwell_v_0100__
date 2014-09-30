@@ -9,13 +9,13 @@
 #ifndef _MAXWELL_MUTEXLOCK_H_
 #define _MAXWELL_MUTEXLOCK_H_
 
-#include "Log.hpp"
 #include "Uncopyable.h"
 
 #include <string.h>
 #include <iostream>
 #include <pthread.h>
 #include <cstdlib>
+#include <stdexcept>
 
 class LockBase:public Uncopyable{
 public:
@@ -58,7 +58,6 @@ public:
 private:
     void excuteError(){
         char *msg = strerror(errno);
-        LogError("%s",msg);
         throw std::runtime_error(msg);
     }
     pthread_mutex_t _mutex;
@@ -113,7 +112,6 @@ public:
 private:
     void excuteError(){
         char *msg = strerror(errno);
-        LogError("%s",msg);
         throw std::runtime_error(msg);
     }
     pthread_rwlock_t _rw_lock;

@@ -58,9 +58,6 @@ public:
         va_list ap;
         //将所有参数按照格式化字符串 fmt 格式化到 msg 对象中
         for(;;){
-#ifdef DEBUG
-            std::cout << msg.size() << std::endl;
-#endif
             msg.resize(msg_size);
             va_start(ap,fmt);
             int n = vsnprintf((char *)msg.c_str(),msg_size,fmt.c_str(),ap);
@@ -98,9 +95,6 @@ public:
         int res_size = 256;
         std::string res_str;
         for(;;){
-#ifdef DEBUG
-            std::cout << msg.size() << std::endl;
-#endif
             res_str.resize(res_size);
             int iret = sprintf((char*)res_str.c_str(),_LOG_FORMAT,time_str,filename.c_str(),lineno,_LOG_LEVEL_ARRAY[level],msg.c_str());
             if(iret>=0&&iret<res_size){
