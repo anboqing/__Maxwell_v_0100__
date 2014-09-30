@@ -17,12 +17,18 @@ void WorkThread::workking(){
     Task t;
     while(1){
         if(_p_pool->getTask(&t)){
-            cout << "t._lo is " <<  t._lo + t._ro << endl;
+            excuteTask(t);
         }else{
-            cout << "getTask false" << endl;
+            LogError("%s","getTask false");
+            break;
         }
     }
 }
+
+void excuteTask(Task &t){
+     cout << "result is " <<  t._lo + t._ro << endl;
+}
+
 void WorkThread::regeditPool(ThreadPool* p_pool){
     _p_pool = p_pool;
 }
