@@ -7,21 +7,22 @@
 
 #include "ThreadPool.h"
 #include "Task.h"
+#include <unistd.h>
 
 int main(){
-    ThreadPool pool(10);
+    ThreadPool pool(1);
     pool.openPool();
     Task t;
     t._lo = 10;
     t._ro = 20;
-    int n = 10;
-    while(--n){
-        pool.addTask(t);
+    while(1){
+        if(!pool.addTask(t))
+            break;
+        sleep(1);
     }
-    pool.closePool();
 }
 
 /*
    g++ ThreadPool_test.cpp ../src/Configure.cpp ../src/Thread.cpp ../src/ThreadPool.cpp ../src/WorkThread.cpp -o pool.out -lpthread -I../include/ -std=c++11 -DDEBUG 
-   */
+*/
 

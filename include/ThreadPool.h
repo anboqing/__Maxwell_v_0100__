@@ -19,7 +19,7 @@
 
 class ThreadPool:public Uncopyable{
 public:
-    typedef std::vector<WorkThread*>::size_type _TYPE_VECSIZE;
+    typedef std::vector<WorkThread>::size_type _TYPE_VECSIZE;
     ThreadPool(const _TYPE_VECSIZE&);
     ~ThreadPool();
 
@@ -27,12 +27,16 @@ public:
     void closePool();
 
     // 能不能传进去 引用或者指针
-    void addTask(Task);
+    bool addTask(Task);
     // 通过返回值返回好 还是 用参数返回好
-    void getTask(Task *);
+    bool getTask(Task *);
 private:
     // 工作线程 容器
-    std::vector<WorkThread*> _thread_vec;
+    /*
+     * 这里vector存放了WorkThread指针的话，那么初始化该Vector用的是 vector<type> vec(number) 这个构造函数
+这个构造函数是Constructs a container with n elements. Each element is a copy of val (if provided).所以存进去的是指向相同对象的n个指针，所以不能存放指针
+     * */
+    std::vector<WorkThread> _thread_vec;
     // 工作任务 队列 （用引用和指针行不行，因为想传进Task的子类）
     std::queue<Task> _task_queue;
     // 互斥锁 条件变量等

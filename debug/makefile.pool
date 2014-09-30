@@ -1,0 +1,2 @@
+pool.out:../include/*.h ../include/Log.hpp ../src/*.cpp
+	g++ ThreadPool_test.cpp ../src/Configure.cpp ../src/Thread.cpp ../src/ThreadPool.cpp ../src/WorkThread.cpp -o pool.out -lpthread -I../include/ -std=c++11 -DDEBUG
