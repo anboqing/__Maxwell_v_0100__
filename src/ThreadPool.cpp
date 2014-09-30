@@ -16,19 +16,16 @@ ThreadPool::ThreadPool(const _TYPE_VECSIZE& vec_size):_thread_vec(vec_size)
                                                       ,_condition(_mutex_lock)
                                                       ,_is_pool_open(false){
     // 给线程池中的每个工作线程 “ 注册” 自身的指针（告诉工作线程可以用这个指针来操作线程池的任务队列）
-    LogDebug("%s","ThreadPool::ThreadPool");
     for(vector<WorkThread>::iterator iter = _thread_vec.begin(); iter!=_thread_vec.end();++iter){
         (*iter).regeditPool(this);
     }
 }
 
 ThreadPool::~ThreadPool(){
-    LogDebug("%s","ThreadPool::~ThreadPool");
     closePool();
 }
 
 void ThreadPool::openPool(){
-    LogDebug("%s","ThreadPool::openPool");
     if(_is_pool_open == true){
         return;
     }
@@ -40,7 +37,6 @@ void ThreadPool::openPool(){
 
 
 void ThreadPool::closePool(){
-    LogDebug("%s","ThreadPool::closePool");
     if(!_is_pool_open){
         return;
     }
@@ -71,7 +67,7 @@ void ThreadPool::closePool(){
                 LogError("%s","该线程id是错误的");
                 break;
             default:
-                LogDebug("线程%d 正常终止",tid);
+                LogInfo("线程%d 正常终止",tid);
                 break;
         }
 
@@ -82,7 +78,6 @@ void ThreadPool::closePool(){
 }
 
 bool ThreadPool::addTask(Task t){
-    LogDebug("%s","ThreadPool::addTask");
     //向任务队列加任务 
     // 要求线程安全
     //先检查线程池是否已经开启(这里就要求加锁保证不会读取到脏数据)
@@ -105,10 +100,9 @@ bool ThreadPool::getTask(Task *return_task){
     // 从任务队列中取出一个任务 到return_task 中
     // 当然也是要求线程安全的
     // 先查看任务队列是否为空
-    LogDebug("%s","ThreadPool::getTask");
     _mutex_lock.lock();
     if(!_is_pool_open){
-        LogDebug("%s","getTask时线程池是关闭的");
+        LogError("%s","getTask时线程池是关闭的");
         _mutex_lock.unlock();
         return false;
     }

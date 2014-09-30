@@ -15,7 +15,6 @@ using namespace std;
 void WorkThread::workking(){
     //从任务队列中取得任务并执行
     Task t;
-    LogDebug("working running");
     while(1){
         if(_p_pool->getTask(&t)){
             cout << "t._lo is " <<  t._lo + t._ro << endl;
