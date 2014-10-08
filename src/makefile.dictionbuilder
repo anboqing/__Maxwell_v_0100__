@@ -1,0 +1,3 @@
+dictionbuilder:DictionBuilder.cpp Configure.cpp
+	g++ -o ../bin/dictionbuilder DictionBuilder.cpp Configure.cpp -lpthread -I../include/ -std=c++11
+

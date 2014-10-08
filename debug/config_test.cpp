@@ -11,5 +11,5 @@ using namespace std;
 
 int main(){
     Configure* p_conf = Configure::getInstance();
-    cout << p_conf->getConfigByName("test")<< endl;
+    cout << p_conf->getConfigByName("HOME_PATH")<< endl;
 }

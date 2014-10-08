@@ -9,11 +9,10 @@
 
 class Task{
 public:
-    Task(){}
-    ~Task(){}
     // void* 是 out-arg
-    int _lo;
+    int _lo;    // 返回的时候用于存放结果
     int _ro;   //virtual void execute(void*)  = 0;
+    int _sock_fd; //用于存放 sock_file_descripter
 };
 
 #endif

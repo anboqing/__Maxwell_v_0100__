@@ -16,6 +16,8 @@
 #include <pthread.h>
 #include <cstdlib>
 #include <stdexcept>
+#include <errno.h>
+#include <strings.h>
 
 class LockBase:public Uncopyable{
 public:

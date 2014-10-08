@@ -60,7 +60,7 @@ private:
     pthread_cond_t _condition;   
     void excuteError(){
         char *msg = strerror(errno);
-        LogError("%s",msg);
+        _LogError("%s",msg);
         throw std::runtime_error(msg);
     }
 };

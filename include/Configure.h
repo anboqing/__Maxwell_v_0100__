@@ -5,15 +5,15 @@
 	> Created Time: 2014年09月27日 星期六 22时50分00秒
  ************************************************************************/
 
+
+#ifndef _CONFIGURE_H_
+#define _CONFIGURE_H_
 #include "Uncopyable.h"
 #include "Lock.h"
 
 #include <map>
 #include <string>
 #include <stdexcept>
-
-#ifndef _CONFIGURE_H_
-#define _CONFIGURE_H_
 
 class Configure:public Uncopyable{
     //把本例实现为线程安全的单例模式
@@ -32,6 +32,7 @@ private:
     static LockBase* _p_lock;
     // 按照文件名读取配置文件的函数
     bool _loadConfigFile(const std::string& conf_file_name);
+    std::string _home_path;
 };
 
 #endif

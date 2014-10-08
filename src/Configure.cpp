@@ -47,8 +47,12 @@ bool Configure::_loadConfigFile(const string& filename){
 
 Configure::Configure(const std::string& conf_file_name){
     if(!_loadConfigFile(conf_file_name)){
-        // LogError
+        _LogError("_loadConfigFile failed!!");
         throw runtime_error("load config file error");
+    }
+    map<string,string>::const_iterator res;
+    if((res = _conf_map.find("HOME_PATH")) != _conf_map.end()){
+        _home_path = res->second;
     }
 }
 
@@ -57,10 +61,12 @@ Configure* Configure::getInstance(){
         // 这是用RAII管理读写锁 防止忘记解锁 造成死锁 
         // 第二个参数 0 代表 加 读锁 1 加 写锁 ，默认是0 ，由于大多是读取用，所以用读锁加锁
         LockSafeGuard raii_locker(*_p_lock);
+        //_p_lock->lock();
         if(_p_conf_instance == NULL){
             // 这里写成固定的是迫不得已，以后再改
-            _p_conf_instance = new Configure("/home/anboqing/Code/CASES/Maxwell/conf/config.dat");
+            _p_conf_instance = new Configure("../conf/config.dat");
         }
+        //_p_lock->unlock();
     }
     return _p_conf_instance;
 }
@@ -69,8 +75,9 @@ string Configure::getConfigByName(const string& key)const{
 // 按照配置名称查找配置信息
     map<string,string>::const_iterator res;
     if( (res =_conf_map.find(key))!=_conf_map.end()){
-        return res->second;
+        return _home_path+res->second;
     }else{
+        throw runtime_error("没有这样的配置信息");
         return string();
     }
 }

@@ -13,22 +13,22 @@
 #include "Configure.h"
 #include "Uncopyable.h"
 
+namespace ABQ{
 // 返回文件基地址的宏（不能改为inline函数是因为宏中用到__FILE__宏）
 // 若路径中有'/' 就返回 '/' 后的位置 .否则就是 __FILE__
 //static void Logging(size_t level,const std::string& filename,int lineno,const std::string& fmt,...){
 #define FILE_BASENAME strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__
 
-#define LogDebug(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_DEBUG, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
+#define _LogDebug(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_DEBUG, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
-#define LogInfo(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_INFO, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
+#define _LogInfo(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_INFO, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
-#define LogWarn(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_WARN, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
+#define _LogWarn(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_WARN, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
-#define LogError(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_ERROR, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
+#define _LogError(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_ERROR, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
-#define LogFatal(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_FATAL, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
+#define _LogFatal(fmt, ...) ABQ::Log::Logging(ABQ::_LEVEL_FATAL, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
-namespace ABQ{
 // 日志等级数组
 static const char * _LOG_LEVEL_ARRAY[5] = {"DEBUG","INFO","WARN","ERROR","FATAL"};
 // 日志格式字符串 (时间，文件名，行号，级别，msg)

@@ -1,6 +1,14 @@
-#这是注释行
-#下面这行是调试信息
-test helloWorld
-
+HOME_PATH /home/anboqing/Code/CASES/Maxwell/
 # 日志文件路径
-LOG_PATH /home/anboqing/Code/CASES/Maxwell/log/log.dat
+LOG_PATH log/log.dat
+# 停用词排除集路径
+EXCLUDE_PATH dict/stop_words.utf8
+# 结巴分词路径
+HMM_DICT_FILE dict/hmm_model.utf8
+JIEBA_DICT_FILE dict/jieba.dict.utf8
+# 自己生成的词库的路径
+MY_DICT_PATH dict/mydict.dat
+# 原始数据路径
+RAW_PATH rawdata/
+# 索引地址
+INDEX_PATH dict/index.dat

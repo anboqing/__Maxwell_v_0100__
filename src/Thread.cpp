@@ -12,6 +12,7 @@
 #include <stdexcept>
 
 using namespace std;
+using namespace ABQ;
 
 //初始化列表用0初始化 _tid是因为 随后线程启动的时候 pthread_create()函数会将第一个参数设置为新建线程的id
 Thread::Thread():_tid(0){
