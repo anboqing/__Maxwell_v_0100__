@@ -69,3 +69,17 @@ bool Index::loadIndex(){
 Index::_INDEX_MAP_TYPE& Index::getIndexMap(){
     return _index_hashmap;
 }
+
+bool Index::getIndexes(const std::string& keyword,std::set<size_t>& result_set){
+    // 返回查询词对应的索引存入set中
+    _INDEX_MAP_TYPE::iterator res_iter;
+    if((res_iter=_index_hashmap.find(keyword))==_index_hashmap.end()){
+        // 如果没找到就返回false
+        return false;
+    }
+    set<size_t>& res = (*res_iter).second;// 这里不能直接赋值,要append到当前的set里面
+    for(auto& index:res){
+        result_set.insert(index);
+    }
+    return true;
+}

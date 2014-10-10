@@ -5,13 +5,12 @@
 #include <string>
 #include <locale.h>
 
-
 void cleanGBKToken(std::string& in){
     //注意输入的必须是gbk的编码
     size_t index = 0;
     size_t count = 0;
     unsigned char high_bytes,low_bytes;
-    //On  startup  of  the  main  program, the portable "C" locale is selected as default.  A program may be made portable to all locales by calling:
+    //On  startup  of  the  main  program, the portable "C" locale is selected as default. A program may be made portable to all locales by calling:
     setlocale(LC_ALL,"");
     while(index < in.size()-1){ //这里减1的原因是因为有双字节字符
         // mblen 返回下一个多字节字符的字节数
@@ -31,9 +30,10 @@ void cleanGBKToken(std::string& in){
             high_bytes = static_cast<unsigned char>(in[index+1]);
             // 如果在标点的范围就把它删掉
 			if (((low_bytes>=0xa1&&low_bytes<=0xa9)&&(high_bytes>=0xa1&&high_bytes<=0xfe))||
-				((low_bytes>=0xa8&&low_bytes<=0xa9)&&(high_bytes>=0x40&&high_bytes<=0xa0)))
+				((low_bytes>=0xa8&&low_bytes<=0xa9)&&(high_bytes>=0x40&&high_bytes<=0xa0))){
 				in.erase(index,2);
-			else
+                //in.insert(index," ");
+            }else
 				index++;
         }
     }

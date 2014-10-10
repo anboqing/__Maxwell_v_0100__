@@ -23,6 +23,7 @@ public:
     typedef std::unordered_map<std::string,std::set<size_t> > _INDEX_MAP_TYPE;
     static Index* getInstance();
     _INDEX_MAP_TYPE& getIndexMap();
+    bool getIndexes(const std::string&,std::set<size_t>&);
 private:
     Index();
     ~Index();
