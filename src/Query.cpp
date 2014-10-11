@@ -31,7 +31,9 @@ void Query::getSimWords(const string& keyword,Query::_RESULT_VEC_TYPE& res_vec){
     // @_1
     vector<string> keyword_letter_vec; // 存储关键词分出来的单个字
     splitIntoLetters(keyword,keyword_letter_vec);
+#ifdef DEBUG
     _LogDebug("keyword_letter_vec.size() %d ",keyword_letter_vec.size());
+#endif
     // 获取索引数据
     Index* p_index = Index::getInstance();
     set<size_t> indexes_set; // 存储所有候选词在词典中的下标
@@ -40,7 +42,9 @@ void Query::getSimWords(const string& keyword,Query::_RESULT_VEC_TYPE& res_vec){
         // 查每个单字在索引中的索引,存到下标集合中
         p_index->getIndexes(aletter,indexes_set);
     }
+#ifdef DEBUG
     _LogDebug("index_set.size() %d ",indexes_set.size());
+#endif
     // 准备词库
     Diction* p_diction = Diction::getInstance();
     Diction::_DICT_VEC_TYPE& diction_vec = p_diction->getDictionVec();
@@ -56,8 +60,9 @@ void Query::getSimWords(const string& keyword,Query::_RESULT_VEC_TYPE& res_vec){
         HeapData4Query data(distance,index);
         small_root_heap.push(data);
     }
+#ifdef DEBUG
     _LogDebug("small_root_heap.size() %d ",small_root_heap.size());
-
+#endif
     // 把优先级队列的前 top_k 个词作为结果返回
     int count = 4;
     while(count--&&!small_root_heap.empty()){

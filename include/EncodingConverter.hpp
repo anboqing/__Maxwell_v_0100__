@@ -19,12 +19,11 @@ int code_convert(char *from_charset,char *to_charset,char *inbuf,size_t inlen,ch
 
     cd = iconv_open(to_charset,from_charset);
     if ( cd == (iconv_t)-1){
-        perror("iconv_open error : ");
         return -1;
     }
     memset(outbuf,0,outlen);
     if (iconv(cd,pin,&inlen,pout,&outlen) ==(size_t)-1){
-        perror("iconv error : ");
+        //perror("iconv error : ");
         return -1;
     }
     iconv_close(cd);

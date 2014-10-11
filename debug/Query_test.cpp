@@ -24,7 +24,6 @@ int  main(){
     }
 }
 
-
 /*
 g++ Query_test.cpp ../src/Query.cpp ../src/Index.cpp ../src/Diction.cpp ../src/Configure.cpp -lpthread -I../include/ -DDEBUG -std=c++11
- * */
+**/
