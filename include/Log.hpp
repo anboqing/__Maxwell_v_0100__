@@ -89,7 +89,8 @@ public:
         std::string log_path = pconf ->getConfigByName("LOG_PATH");
         std::ofstream ofs(log_path.c_str(),std::ofstream::app);
         if(!ofs.is_open()){
-            throw std::runtime_error("log_path is incorrectly \n");
+            perror(log_path.c_str());
+            throw std::runtime_error("log_path : \n");
         }
         // 输出格式 
         int res_size = 256;

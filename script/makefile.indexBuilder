@@ -1,0 +1,4 @@
+TARGET=../bin/indexBuilder.out
+FLAGS=-std=c++11 -lpthread -I../include/ -DDEBUG
+indexBuilder:Diction.cpp Configure.cpp IndexBuilder.cpp
+	g++ -o $(TARGET) Diction.cpp Configure.cpp IndexBuilder.cpp $(FLAGS)

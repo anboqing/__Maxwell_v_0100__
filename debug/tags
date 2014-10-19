@@ -1,0 +1,26 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+bow	condition_test.cpp	/^static queue<int> bow;$/;"	v	file:
+consumer_thread_func	condition_test.cpp	/^void *consumer_thread_func(void *arg){$/;"	f
+func	vsnprintf_test.cpp	/^void func(string& fmt,...){$/;"	f
+lock	condition_test.cpp	/^static MutexLock lock;$/;"	v	file:
+main	Diction_Test.cpp	/^int main(){$/;"	f
+main	Index_test.cpp	/^int main(){$/;"	f
+main	Query_test.cpp	/^int  main(){$/;"	f
+main	ThreadPool_test.cpp	/^int main(){$/;"	f
+main	cleanToken_test.cpp	/^int main()$/;"	f
+main	condition_test.cpp	/^int main(){$/;"	f
+main	config_test.cpp	/^int main(){$/;"	f
+main	editdistance_test.cpp	/^int main(){$/;"	f
+main	encoding_test.cpp	/^int main(){$/;"	f
+main	fork_client.cpp	/^int main(){$/;"	f
+main	log_test.cpp	/^int main(){$/;"	f
+main	splitUtf8_test.cpp	/^int main(){$/;"	f
+main	test.cpp	/^int main(){$/;"	f
+main	test_switch.cpp	/^int main(){$/;"	f
+main	vsnprintf_test.cpp	/^int main(){$/;"	f
+splitIntoLetters	splitUtf8_test.cpp	/^void splitIntoLetters(const string& key_word,vector<string>& letters_vec){$/;"	f

@@ -10,24 +10,19 @@
 #include "../include/Diction.h"
 #include "../include/edit_distance.h"
 #include "../include/Log.hpp"
-
 #include <queue>
 
 using namespace std;
 
 Query::Query(){}
-
 Query::~Query(){}
-
 void Query::getSimWords(const string& keyword,Query::_RESULT_VEC_TYPE& res_vec){
     /* 从索引中查找 
      * 1. 把关键词切分成单个汉字或字母存入一个vector<string>
      * 2. 在索引中查找每个字在索引中的下标，并把本关键词的所有字的索引项存起来set<size_t>，这样就可以通过set中的下标找到该单词在词库中对应的词（候选词）
      * 3. 计算关键词和所有候选词的编辑距离，并且把计算结果加入小根堆中，建堆的时候按照编辑距离建堆，这样堆的最顶端一直是编辑距离最小的候选词，也就是和关键词最相近的候选词
     */    
-    
     priority_queue<HeapData4Query> small_root_heap;
-
     // @_1
     vector<string> keyword_letter_vec; // 存储关键词分出来的单个字
     splitIntoLetters(keyword,keyword_letter_vec);
@@ -48,7 +43,6 @@ void Query::getSimWords(const string& keyword,Query::_RESULT_VEC_TYPE& res_vec){
     // 准备词库
     Diction* p_diction = Diction::getInstance();
     Diction::_DICT_VEC_TYPE& diction_vec = p_diction->getDictionVec();
-
     //@_3
     for(auto& index : indexes_set){
         // 遍历每个下标，取出词库中对应下标的词，逐一和查询词计算编辑距离

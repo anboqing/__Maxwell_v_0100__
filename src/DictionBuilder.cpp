@@ -64,7 +64,7 @@ void readFileToMap(const char* filename,CppJieba::MixSegment &seg){
         // 用格式转换器把gbk转换成utf8
         string new_words;
         if(!gbk_utf8(words,new_words)){
-            _LogInfo("////%s",filename);
+            _LogInfo("文件格式转换错误%s",filename);
             continue;
         }
         vec_line_words.clear();

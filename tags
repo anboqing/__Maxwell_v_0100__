@@ -10,7 +10,7 @@ ArgvContext	include/CppJieba/Limonp/ArgvContext.hpp	/^            ArgvContext(in
 ArgvContext	include/CppJieba/Limonp/ArgvContext.hpp	/^    class ArgvContext$/;"	c	namespace:Limonp
 ArrayIndex	include/json/value.h	/^      typedef UInt ArrayIndex;$/;"	t	class:Json::Value
 ArrayIndex	include/json/value.h	/^      typedef Value::ArrayIndex ArrayIndex;$/;"	t	class:Json::ValueInternalArray
-B	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon2
+B	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon1
 BACKLOG	src/fork_server.cpp	26;"	d	file:
 BYTE	include/CppJieba/Limonp/Md5.hpp	/^typedef unsigned char BYTE ;$/;"	t	namespace:Limonp
 BlockingQueue	include/CppJieba/Limonp/BlockingQueue.hpp	/^                BlockingQueue()$/;"	f	class:Limonp::BlockingQueue
@@ -38,7 +38,7 @@ CPPTL_AUTOLINK_NAME	include/json/autolink.h	11;"	d
 CPPTL_JSON_FEATURES_H_INCLUDED	include/json/features.h	2;"	d
 CPPTL_JSON_H_INCLUDED	include/json/value.h	2;"	d
 CPPTL_JSON_READER_H_INCLUDED	include/json/reader.h	2;"	d
-CSTR_BUFFER_SIZE	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon1
+CSTR_BUFFER_SIZE	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon2
 CZString	include/json/value.h	/^      class CZString $/;"	c	class:Json::Value
 CastFloat	include/CppJieba/Limonp/CastFloat.hpp	/^    namespace CastFloat$/;"	n	namespace:Limonp
 Char	include/json/reader.h	/^      typedef char Char;$/;"	t	class:Json::Reader
@@ -72,6 +72,8 @@ CreateTask	include/CppJieba/Limonp/ThreadPool.hpp	/^        ITask* CreateTask(Ar
 CreateTask	include/CppJieba/Limonp/ThreadPool.hpp	/^        ITask* CreateTask(ArgType0 arg0, ArgType1 arg1) $/;"	f	namespace:Limonp
 DICT_COLUMN_NUM	include/CppJieba/DictTrie.hpp	/^    const size_t DICT_COLUMN_NUM = 3;$/;"	m	namespace:CppJieba
 DagType	include/CppJieba/DictTrie.hpp	/^    typedef map<size_t, const DictUnit*> DagType;$/;"	t	namespace:CppJieba
+Data	src/RipeLib_Distinctor.cpp	/^    Data(const std::string& wd,int fr):_word(wd),_frequency(fr){}$/;"	f	class:Data
+Data	src/RipeLib_Distinctor.cpp	/^class Data{$/;"	c	file:
 Decode	include/CppJieba/Limonp/Md5.hpp	/^  static void Decode( UINT4 *output, unsigned char *input, unsigned int len )$/;"	f	class:Limonp::MD5
 DictTrie	include/CppJieba/DictTrie.hpp	/^            DictTrie()$/;"	f	class:CppJieba::DictTrie
 DictTrie	include/CppJieba/DictTrie.hpp	/^            DictTrie(const string& dictPath, const string& userDictPath = "")$/;"	f	class:CppJieba::DictTrie
@@ -79,8 +81,10 @@ DictTrie	include/CppJieba/DictTrie.hpp	/^    class DictTrie$/;"	c	namespace:CppJ
 DictUnit	include/CppJieba/DictTrie.hpp	/^    struct DictUnit$/;"	s	namespace:CppJieba
 Diction	include/Diction.h	/^class Diction:public Uncopyable{$/;"	c
 Diction	src/Diction.cpp	/^Diction::Diction():_dict_vec(){$/;"	f	class:Diction
+Document	include/Document.h	/^    Document(size_t id,const std::string& url,$/;"	f	class:Document
+Document	include/Document.h	/^class Document{$/;"	c
 DuplicationPolicy	include/json/value.h	/^         enum DuplicationPolicy $/;"	g	class:Json::Value::CZString
-E	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon2
+E	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon1
 EmitProbMap	include/CppJieba/HMMSegment.hpp	/^    typedef unordered_map<uint16_t, double> EmitProbMap;$/;"	t	namespace:CppJieba
 Encode	include/CppJieba/Limonp/Md5.hpp	/^  static void Encode( unsigned char *output, UINT4 *input, unsigned int len )$/;"	f	class:Limonp::MD5
 ErrorInfo	include/json/reader.h	/^      class ErrorInfo$/;"	c	class:Json::Reader
@@ -146,7 +150,7 @@ KeywordExtractor	include/CppJieba/KeywordExtractor.hpp	/^            KeywordExtr
 KeywordExtractor	include/CppJieba/KeywordExtractor.hpp	/^            KeywordExtractor(const string& dictPath, const string& hmmFilePath, const string& idfPath, const string& stopWordPath)$/;"	f	class:CppJieba::KeywordExtractor
 KeywordExtractor	include/CppJieba/KeywordExtractor.hpp	/^    class KeywordExtractor$/;"	c	namespace:CppJieba
 Kind	include/json/value.h	/^      enum Kind$/;"	g	class:Json::PathArgument
-LEVEL_ARRAY_SIZE	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon1
+LEVEL_ARRAY_SIZE	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon2
 LIMONP_ARGV_FUNCTS_H	include/CppJieba/Limonp/ArgvContext.hpp	7;"	d
 LIMONP_BLOCKINGQUEUE_HPP	include/CppJieba/Limonp/BlockingQueue.hpp	6;"	d
 LIMONP_BOUNDED_QUEUE_HPP	include/CppJieba/Limonp/BoundedQueue.hpp	2;"	d
@@ -166,11 +170,11 @@ LIMONP_STD_EXTEMSION_HPP	include/CppJieba/Limonp/StdExtension.hpp	2;"	d
 LIMONP_STR_FUNCTS_H	include/CppJieba/Limonp/StringUtil.hpp	6;"	d
 LIMONP_THREAD_HPP	include/CppJieba/Limonp/Thread.hpp	2;"	d
 LIMONP_THREAD_POOL_HPP	include/CppJieba/Limonp/ThreadPool.hpp	2;"	d
-LL_DEBUG	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon1
-LL_ERROR	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon1
-LL_FATAL	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon1
-LL_INFO	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon1
-LL_WARN	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon1
+LL_DEBUG	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon2
+LL_ERROR	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon2
+LL_FATAL	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon2
+LL_INFO	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon2
+LL_WARN	include/CppJieba/Limonp/Logger.hpp	/^    enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 32};$/;"	e	enum:Limonp::__anon2
 LOCAL_VECTOR_BUFFER_SIZE	include/CppJieba/Limonp/LocalVector.hpp	/^    const size_t LOCAL_VECTOR_BUFFER_SIZE = 16;$/;"	m	namespace:Limonp
 LOG_FORMAT	include/CppJieba/Limonp/Logger.hpp	/^    static const char * LOG_FORMAT = "%s %s:%d %s %s\\n";$/;"	m	namespace:Limonp
 LOG_LEVEL_ARRAY	include/CppJieba/Limonp/Logger.hpp	/^    static const char * LOG_LEVEL_ARRAY[LEVEL_ARRAY_SIZE]= {"DEBUG","INFO","WARN","ERROR","FATAL"};$/;"	m	namespace:Limonp
@@ -212,7 +216,7 @@ Logger	include/CppJieba/Limonp/Logger.hpp	/^    class Logger$/;"	c	namespace:Lim
 Logging	include/CppJieba/Limonp/Logger.hpp	/^            static void Logging(size_t level, const string& msg, const char* fileName, int lineno)$/;"	f	class:Limonp::Logger
 Logging	include/Log.hpp	/^    static void Logging(size_t level,const std::string& filename,int lineno,const std::string& fmt,...){$/;"	f	class:ABQ::Log
 LoggingF	include/CppJieba/Limonp/Logger.hpp	/^            static void LoggingF(size_t level, const char* fileName, int lineno, const char* const fmt, ...)$/;"	f	class:Limonp::Logger
-M	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon2
+M	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon1
 MAP_TYPE	src/IndexBuilder.cpp	/^typedef map<string,set<size_t> > MAP_TYPE;$/;"	t	file:
 MAX_DOUBLE	include/CppJieba/DictTrie.hpp	/^    const double MAX_DOUBLE = 3.14e+100;$/;"	m	namespace:CppJieba
 MD5	include/CppJieba/Limonp/Md5.hpp	/^  MD5()$/;"	f	class:Limonp::MD5
@@ -258,7 +262,7 @@ RWLock	include/Lock.h	/^    RWLock(){$/;"	f	class:RWLock
 RWLock	include/Lock.h	/^class RWLock:public LockBase{$/;"	c
 Reader	include/json/reader.h	/^   class JSON_API Reader$/;"	c	namespace:Json
 RowsType	include/CppJieba/Limonp/MysqlClient.hpp	/^            typedef vector< vector<string> > RowsType;$/;"	t	class:Limonp::MysqlClient
-S	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon2
+S	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon1
 S11	include/CppJieba/Limonp/Md5.hpp	39;"	d
 S12	include/CppJieba/Limonp/Md5.hpp	40;"	d
 S13	include/CppJieba/Limonp/Md5.hpp	41;"	d
@@ -276,7 +280,7 @@ S42	include/CppJieba/Limonp/Md5.hpp	52;"	d
 S43	include/CppJieba/Limonp/Md5.hpp	53;"	d
 S44	include/CppJieba/Limonp/Md5.hpp	54;"	d
 SPECIAL_SYMBOL	include/CppJieba/SegmentBase.hpp	/^    const UnicodeValueType SPECIAL_SYMBOL[] = {32u, 9u, 10u, 12290u, 65292u};  $/;"	m	namespace:CppJieba
-STATUS_SUM	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon2
+STATUS_SUM	include/CppJieba/HMMSegment.hpp	/^            enum {B = 0, E = 1, M = 2, S = 3, STATUS_SUM = 4};$/;"	e	enum:CppJieba::HMMSegment::__anon1
 SegmentBase	include/CppJieba/SegmentBase.hpp	/^            SegmentBase(){_loadSpecialSymbols();};$/;"	f	class:CppJieba::SegmentBase
 SegmentBase	include/CppJieba/SegmentBase.hpp	/^    class SegmentBase: public ISegment, public NonCopyable$/;"	c	namespace:CppJieba
 SegmentChar	include/CppJieba/MPSegment.hpp	/^        SegmentChar():uniCh(0), pInfo(NULL), weight(0.0), nextPos(0)$/;"	f	struct:CppJieba::SegmentChar
@@ -334,6 +338,7 @@ _CONFIGURE_H_	include/Configure.h	10;"	d
 _CSTR_BUFFER_SIZE	include/Log.hpp	/^static const int _CSTR_BUFFER_SIZE = 32;$/;"	m	namespace:ABQ
 _DICTION_H_	include/Diction.h	8;"	d
 _DICT_VEC_TYPE	include/Diction.h	/^    typedef std::vector<std::pair<std::string,size_t> > _DICT_VEC_TYPE;$/;"	t	class:Diction
+_DOCUMENT_H_	include/Document.h	9;"	d
 _EDIT_DISTANCE_H_	include/edit_distance.h	8;"	d
 _ENCODING_CONVERTER_H_	include/EncodingConverter.hpp	3;"	d
 _ILEAGAL	include/edit_distance.h	18;"	d
@@ -369,11 +374,11 @@ _MAXWELL_THREAD_H_	include/Thread.h	8;"	d
 _MAXWELL_UNCOPYABLE_H_	include/Uncopyable.h	9;"	d
 _MAXWELL_WORKTHREAD_H_	include/WorkThread.h	8;"	d
 _QUERY_H_	include/Query.h	8;"	d
-_READLOCK	include/Lock.h	/^    enum{_READLOCK = 0,_WRITELOCK = 1};$/;"	e	enum:LockBase::__anon7
+_READLOCK	include/Lock.h	/^    enum{_READLOCK = 0,_WRITELOCK = 1};$/;"	e	enum:LockBase::__anon3
 _RESULT_VEC_TYPE	include/Query.h	/^    typedef std::vector<std::pair<std::string,int> > _RESULT_VEC_TYPE;$/;"	t	class:Query
 _STRING_TOOL_H_	include/string_tools.h	3;"	d
 _TYPE_VECSIZE	include/ThreadPool.h	/^    typedef std::vector<WorkThread>::size_type _TYPE_VECSIZE;$/;"	t	class:ThreadPool
-_WRITELOCK	include/Lock.h	/^    enum{_READLOCK = 0,_WRITELOCK = 1};$/;"	e	enum:LockBase::__anon7
+_WRITELOCK	include/Lock.h	/^    enum{_READLOCK = 0,_WRITELOCK = 1};$/;"	e	enum:LockBase::__anon3
 __MD5_H__	include/CppJieba/Limonp/Md5.hpp	2;"	d
 __context_t	include/CppJieba/Limonp/Md5.hpp	/^  struct __context_t {$/;"	s	class:Limonp::MD5
 _calcDP	include/CppJieba/MPSegment.hpp	/^            void _calcDP(vector<SegmentChar>& SegmentChars) const$/;"	f	class:CppJieba::MPSegment
@@ -383,6 +388,7 @@ _cond_lock	include/Condition.h	/^    MutexLock& _cond_lock;$/;"	m	class:Conditio
 _condition	include/Condition.h	/^    pthread_cond_t _condition;   $/;"	m	class:Condition
 _condition	include/ThreadPool.h	/^    Condition _condition;$/;"	m	class:ThreadPool
 _conf_map	include/Configure.h	/^    std::map<std::string,std::string> _conf_map;$/;"	m	class:Configure
+_content	include/Document.h	/^    std::string _content;$/;"	m	class:Document
 _creatTrie	include/CppJieba/DictTrie.hpp	/^            TrieType * _creatTrie(const vector<DictUnit>& dictUnits)$/;"	f	class:CppJieba::DictTrie
 _createTrie	include/CppJieba/Trie.hpp	/^                void _createTrie(const KeysContainerType& keys, const ValueContainerType& valuePointers)$/;"	f	class:CppJieba::Trie
 _cut	include/CppJieba/HMMSegment.hpp	/^            bool _cut(Unicode::const_iterator begin, Unicode::const_iterator end, vector<Unicode>& res) const $/;"	f	class:CppJieba::HMMSegment
@@ -393,14 +399,17 @@ _dictTrie	include/CppJieba/MPSegment.hpp	/^            DictTrie _dictTrie;$/;"	m
 _dictTrie	include/CppJieba/PosTagger.hpp	/^            DictTrie _dictTrie;$/;"	m	class:CppJieba::PosTagger
 _dict_vec	include/Diction.h	/^    _DICT_VEC_TYPE _dict_vec;$/;"	m	class:Diction
 _distance	include/Query.h	/^    int _distance;$/;"	m	class:HeapData4Query
+_docid	include/Document.h	/^    size_t _docid;$/;"	m	class:Document
 _emitProbB	include/CppJieba/HMMSegment.hpp	/^            EmitProbMap _emitProbB;$/;"	m	class:CppJieba::HMMSegment
 _emitProbE	include/CppJieba/HMMSegment.hpp	/^            EmitProbMap _emitProbE;$/;"	m	class:CppJieba::HMMSegment
 _emitProbM	include/CppJieba/HMMSegment.hpp	/^            EmitProbMap _emitProbM;$/;"	m	class:CppJieba::HMMSegment
 _emitProbS	include/CppJieba/HMMSegment.hpp	/^            EmitProbMap _emitProbS;$/;"	m	class:CppJieba::HMMSegment
 _emitProbVec	include/CppJieba/HMMSegment.hpp	/^            vector<EmitProbMap* > _emitProbVec;$/;"	m	class:CppJieba::HMMSegment
 _exclude_set	src/DictionBuilder.cpp	/^set<string> _exclude_set;$/;"	v
+_exclude_set	src/RipeLib_Distinctor.cpp	/^set<string> _exclude_set;$/;"	v
 _findMaxWeight	include/CppJieba/DictTrie.hpp	/^            double _findMaxWeight(const vector<DictUnit>& nodeInfos) const$/;"	f	class:CppJieba::DictTrie
 _findMinWeight	include/CppJieba/DictTrie.hpp	/^            double _findMinWeight(const vector<DictUnit>& nodeInfos) const$/;"	f	class:CppJieba::DictTrie
+_frequency	src/RipeLib_Distinctor.cpp	/^    int _frequency;$/;"	m	class:Data	file:
 _fullSeg	include/CppJieba/QuerySegment.hpp	/^        FullSegment _fullSeg;$/;"	m	class:CppJieba::QuerySegment
 _getEmitProb	include/CppJieba/HMMSegment.hpp	/^            double _getEmitProb(const EmitProbMap* ptMp, uint16_t key, double defVal)const $/;"	f	class:CppJieba::HMMSegment
 _getLine	include/CppJieba/HMMSegment.hpp	/^            bool _getLine(ifstream& ifile, string& line)$/;"	f	class:CppJieba::HMMSegment
@@ -455,10 +464,13 @@ _stopWords	include/CppJieba/KeywordExtractor.hpp	/^            unordered_set<str
 _task_queue	include/ThreadPool.h	/^    std::queue<Task> _task_queue;$/;"	m	class:ThreadPool
 _thread_vec	include/ThreadPool.h	/^    std::vector<WorkThread> _thread_vec;$/;"	m	class:ThreadPool
 _tid	include/Thread.h	/^    pthread_t _tid;$/;"	m	class:Thread
+_title	include/Document.h	/^    std::string _title;$/;"	m	class:Document
 _transProb	include/CppJieba/HMMSegment.hpp	/^            double _transProb[STATUS_SUM][STATUS_SUM];$/;"	m	class:CppJieba::HMMSegment
 _trie	include/CppJieba/DictTrie.hpp	/^            TrieType * _trie;$/;"	m	class:CppJieba::DictTrie
+_url	include/Document.h	/^    std::string _url;$/;"	m	class:Document
 _userDictSingleChineseWord	include/CppJieba/DictTrie.hpp	/^            unordered_set<Unicode::value_type> _userDictSingleChineseWord;$/;"	m	class:CppJieba::DictTrie
 _viterbi	include/CppJieba/HMMSegment.hpp	/^            bool _viterbi(Unicode::const_iterator begin, Unicode::const_iterator end, vector<size_t>& status)const$/;"	f	class:CppJieba::HMMSegment
+_word	src/RipeLib_Distinctor.cpp	/^    std::string _word;$/;"	m	class:Data	file:
 add	include/CppJieba/Limonp/ThreadPool.hpp	/^            void add(ITask* task)$/;"	f	class:Limonp::ThreadPool
 addChildValues_	include/json/writer.h	/^      bool addChildValues_;$/;"	m	class:Json::StyledStreamWriter
 addChildValues_	include/json/writer.h	/^      bool addChildValues_;$/;"	m	class:Json::StyledWriter
@@ -469,7 +481,7 @@ args_	include/json/value.h	/^      Args args_;$/;"	m	class:Json::Path
 arrayValue	include/json/value.h	/^      arrayValue,    \/\/\/< array value (ordered list)$/;"	e	enum:Json::ValueType
 array_	include/json/value.h	/^         ValueInternalArray *array_;$/;"	m	struct:Json::ValueInternalArray::IteratorState
 array_	include/json/value.h	/^         ValueInternalArray *array_;$/;"	m	union:Json::Value::ValueHolder
-array_	include/json/value.h	/^         ValueInternalArray::IteratorState array_;$/;"	m	union:Json::ValueIteratorBase::__anon6
+array_	include/json/value.h	/^         ValueInternalArray::IteratorState array_;$/;"	m	union:Json::ValueIteratorBase::__anon7
 begin	include/CppJieba/Limonp/LocalVector.hpp	/^                const_iterator begin() const$/;"	f	class:Limonp::LocalVector
 begin_	include/json/reader.h	/^      Location begin_;$/;"	m	class:Json::Reader
 bool_	include/json/value.h	/^         bool bool_;$/;"	m	union:Json::Value::ValueHolder
@@ -481,6 +493,9 @@ buckets_	include/json/value.h	/^      ValueInternalLink *buckets_;$/;"	m	class:J
 buffer	include/CppJieba/Limonp/Md5.hpp	/^    unsigned char buffer[64];                         \/* input buffer *\/$/;"	m	struct:Limonp::MD5::__context_t
 buffer_	include/CppJieba/Limonp/LocalVector.hpp	/^                T buffer_[LOCAL_VECTOR_BUFFER_SIZE];$/;"	m	class:Limonp::LocalVector
 buildExcludeSet	src/DictionBuilder.cpp	/^void buildExcludeSet(){$/;"	f
+build_document_vec	src/RipeLib_Distinctor.cpp	/^bool build_document_vec(){$/;"	f
+build_exclude_set	src/RipeLib_Distinctor.cpp	/^void build_exclude_set(){$/;"	f
+build_offsets_vec	src/RipeLib_Distinctor.cpp	/^bool build_offsets_vec(){$/;"	f
 c_str	include/json/value.h	/^      const char *c_str() const$/;"	f	class:Json::StaticString
 capacity	include/CppJieba/Limonp/BlockingQueue.hpp	/^                size_t capacity() const$/;"	f	class:Limonp::BoundedBlockingQueue
 capacity	include/CppJieba/Limonp/BoundedQueue.hpp	/^                size_t capacity() const$/;"	f	class:Limonp::BoundedQueue
@@ -538,6 +553,8 @@ digestFile	include/CppJieba/Limonp/Md5.hpp	/^  const char* digestFile( const cha
 digestMemory	include/CppJieba/Limonp/Md5.hpp	/^  const char* digestMemory( BYTE *memchunk, int len )$/;"	f	class:Limonp::MD5
 digestRaw	include/CppJieba/Limonp/Md5.hpp	/^  BYTE digestRaw[ 16 ] ;$/;"	m	class:Limonp::MD5
 digestString	include/CppJieba/Limonp/Md5.hpp	/^  const char* digestString(const char *string )$/;"	f	class:Limonp::MD5
+doc_id	src/RipeLib_Distinctor.cpp	/^static int doc_id = 0;$/;"	v	file:
+docid	src/RipeLib_Generator.cpp	/^static size_t docid = 1;$/;"	v	file:
 document_	include/json/reader.h	/^      std::string document_;$/;"	m	class:Json::Reader
 document_	include/json/writer.h	/^      std::ostream* document_;$/;"	m	class:Json::StyledStreamWriter
 document_	include/json/writer.h	/^      std::string document_;$/;"	m	class:Json::FastWriter
@@ -569,11 +586,13 @@ exponent_fill_32	include/CppJieba/Limonp/CastFloat.hpp	/^        static const in
 extra_	include/json/reader.h	/^         Location extra_;$/;"	m	class:Json::Reader::ErrorInfo
 extract	include/CppJieba/KeywordExtractor.hpp	/^            bool extract(const string& str, vector<pair<string, double> >& keywords, size_t topN) const$/;"	f	class:CppJieba::KeywordExtractor
 extract	include/CppJieba/KeywordExtractor.hpp	/^            bool extract(const string& str, vector<string>& keywords, size_t topN) const$/;"	f	class:CppJieba::KeywordExtractor
+extractTopn	src/RipeLib_Distinctor.cpp	/^void extractTopn(CppJieba::MixSegment& seg){$/;"	f
 features_	include/json/reader.h	/^      Features features_;$/;"	m	class:Json::Reader
 find	include/CppJieba/DictTrie.hpp	/^            bool find(Unicode::const_iterator begin, Unicode::const_iterator end, DagType& dag, size_t offset = 0) const$/;"	f	class:CppJieba::DictTrie
 find	include/CppJieba/DictTrie.hpp	/^            const DictUnit* find(Unicode::const_iterator begin, Unicode::const_iterator end) const$/;"	f	class:CppJieba::DictTrie
 find	include/CppJieba/Trie.hpp	/^                bool find(typename KeyContainerType::const_iterator begin, typename KeyContainerType::const_iterator end, map<typename KeyContainerType::size_type, const ValueType* >& ordererMap, size_t offset = 0) const$/;"	f	class:CppJieba::Trie
 find	include/CppJieba/Trie.hpp	/^                const ValueType* find(typename KeyContainerType::const_iterator begin, typename KeyContainerType::const_iterator end) const$/;"	f	class:CppJieba::Trie
+fingerprint_vec	src/RipeLib_Distinctor.cpp	/^vector<vector<string> > fingerprint_vec;$/;"	v
 flagAvailable	include/json/value.h	/^         flagAvailable = 0,$/;"	e	enum:Json::ValueInternalLink::InternalFlags
 flagUsed	include/json/value.h	/^         flagUsed = 1$/;"	e	enum:Json::ValueInternalLink::InternalFlags
 floatToIntBits	include/CppJieba/Limonp/CastFloat.hpp	/^        inline int floatToIntBits(float f)$/;"	f	namespace:Limonp::CastFloat
@@ -592,6 +611,11 @@ getConfigInfo	include/CppJieba/Limonp/Config.hpp	/^            string getConfigI
 getDictTrie	include/CppJieba/MPSegment.hpp	/^            const DictTrie* getDictTrie() const $/;"	f	class:CppJieba::MPSegment
 getDictTrie	include/CppJieba/MixSegment.hpp	/^            const DictTrie* getDictTrie() const $/;"	f	class:CppJieba::MixSegment
 getDictionVec	src/Diction.cpp	/^Diction::_DICT_VEC_TYPE& Diction::getDictionVec(){$/;"	f	class:Diction
+getDocContent	include/Document.h	/^    const std::string& getDocContent()const{$/;"	f	class:Document
+getDocId	include/Document.h	/^    size_t getDocId()const{$/;"	f	class:Document
+getDocTitle	include/Document.h	/^    const std::string& getDocTitle()const{$/;"	f	class:Document
+getDocTopTen	src/RipeLib_Distinctor.cpp	/^void getDocTopTen(Document& doc,CppJieba::MixSegment &seg){$/;"	f
+getDocUrl	include/Document.h	/^    const std::string& getDocUrl()const{$/;"	f	class:Document
 getEditDistance	include/edit_distance.h	/^int getEditDistance(const std::string& candidite,const std::string& keyword){$/;"	f
 getIndexMap	src/Index.cpp	/^Index::_INDEX_MAP_TYPE& Index::getIndexMap(){$/;"	f	class:Index
 getIndexes	src/Index.cpp	/^bool Index::getIndexes(const std::string& keyword,std::set<size_t>& result_set){$/;"	f	class:Index
@@ -630,6 +654,7 @@ init	include/CppJieba/MPSegment.hpp	/^            bool init(const string& dictPa
 init	include/CppJieba/MixSegment.hpp	/^            bool init(const string& mpSegDict, const string& hmmSegDict, const string& userDict = "")$/;"	f	class:CppJieba::MixSegment
 init	include/CppJieba/PosTagger.hpp	/^            bool init(const string& dictPath, const string& hmmFilePath, const string& charStatus, const string& startProb, const string& emitProb, const string& endProb, const string& transProb)$/;"	f	class:CppJieba::PosTagger
 init	include/CppJieba/QuerySegment.hpp	/^        bool init(const string& dict, const string& model, size_t maxWordLen)$/;"	f	class:CppJieba::QuerySegment
+init	src/RipeLib_Generator.cpp	/^void init(){$/;"	f
 init_	include/CppJieba/Limonp/LocalVector.hpp	/^                void init_()$/;"	f	class:Limonp::LocalVector
 init_	include/CppJieba/Limonp/MysqlClient.hpp	/^            bool init_()$/;"	f	class:Limonp::MysqlClient
 insert	include/CppJieba/Limonp/MysqlClient.hpp	/^            size_t insert(const string& tableName, const string& keys, const vector<string>& vals)$/;"	f	class:Limonp::MysqlClient
@@ -649,11 +674,11 @@ isUserDictSingleChineseWord	include/CppJieba/DictTrie.hpp	/^            bool isU
 isUserDictSingleChineseWord	include/CppJieba/MPSegment.hpp	/^            bool isUserDictSingleChineseWord(const Unicode::value_type & value) const$/;"	f	class:CppJieba::MPSegment
 itemCount_	include/json/value.h	/^      BucketIndex itemCount_;$/;"	m	class:Json::ValueInternalMap
 itemIndex_	include/json/value.h	/^         BucketIndex itemIndex_;$/;"	m	struct:Json::ValueInternalMap::IteratorState
-itemPerLink	include/json/value.h	/^      enum { itemPerLink = 6 };  \/\/ sizeof(ValueInternalLink) = 128 on 32 bits architecture.$/;"	e	enum:Json::ValueInternalLink::__anon4
-itemsPerPage	include/json/value.h	/^      enum { itemsPerPage = 8 };    \/\/ should be a power of 2 for fast divide and modulo.$/;"	e	enum:Json::ValueInternalArray::__anon5
+itemPerLink	include/json/value.h	/^      enum { itemPerLink = 6 };  \/\/ sizeof(ValueInternalLink) = 128 on 32 bits architecture.$/;"	e	enum:Json::ValueInternalLink::__anon5
+itemsPerPage	include/json/value.h	/^      enum { itemsPerPage = 8 };    \/\/ should be a power of 2 for fast divide and modulo.$/;"	e	enum:Json::ValueInternalArray::__anon6
 items_	include/json/value.h	/^      Value items_[itemPerLink];$/;"	m	class:Json::ValueInternalLink
 iterator	include/json/value.h	/^      typedef ValueIterator iterator;$/;"	t	class:Json::Value
-iterator_	include/json/value.h	/^      } iterator_;$/;"	m	class:Json::ValueIteratorBase	typeref:union:Json::ValueIteratorBase::__anon6
+iterator_	include/json/value.h	/^      } iterator_;$/;"	m	class:Json::ValueIteratorBase	typeref:union:Json::ValueIteratorBase::__anon7
 join	include/CppJieba/Limonp/StringUtil.hpp	/^        string join(T begin, T end, const string& connector)$/;"	f	namespace:Limonp
 join	include/CppJieba/Limonp/StringUtil.hpp	/^        void join(T begin, T end, string& res, const string& connector)$/;"	f	namespace:Limonp
 join	include/CppJieba/Limonp/Thread.hpp	/^            void join()$/;"	f	class:Limonp::IThread
@@ -685,15 +710,20 @@ main	debug/ThreadPool_test.cpp	/^int main(){$/;"	f
 main	debug/cleanToken_test.cpp	/^int main()$/;"	f
 main	debug/condition_test.cpp	/^int main(){$/;"	f
 main	debug/config_test.cpp	/^int main(){$/;"	f
+main	debug/dir_func_test.cpp	/^int main(){$/;"	f
 main	debug/editdistance_test.cpp	/^int main(){$/;"	f
 main	debug/encoding_test.cpp	/^int main(){$/;"	f
 main	debug/fork_client.cpp	/^int main(){$/;"	f
 main	debug/log_test.cpp	/^int main(){$/;"	f
+main	debug/ofs_open_debug.cpp	/^int main(){$/;"	f
 main	debug/splitUtf8_test.cpp	/^int main(){$/;"	f
+main	debug/test.cpp	/^int main(){$/;"	f
 main	debug/test_switch.cpp	/^int main(){$/;"	f
 main	debug/vsnprintf_test.cpp	/^int main(){$/;"	f
 main	src/DictionBuilder.cpp	/^int main(){$/;"	f
 main	src/IndexBuilder.cpp	/^int main(){$/;"	f
+main	src/RipeLib_Distinctor.cpp	/^int main(){$/;"	f
+main	src/RipeLib_Generator.cpp	/^int main(){$/;"	f
 main	src/fork_server.cpp	/^int main(){$/;"	f
 mantissa_16	include/CppJieba/Limonp/CastFloat.hpp	/^        static const short mantissa_16 = (short)0x03FF;$/;"	m	namespace:Limonp::CastFloat
 mantissa_32	include/CppJieba/Limonp/CastFloat.hpp	/^        static const int mantissa_32 = 0x007FE000;$/;"	m	namespace:Limonp::CastFloat
@@ -701,7 +731,7 @@ map_	include/CppJieba/Limonp/Config.hpp	/^            map<string, string> map_;$
 map_	include/json/value.h	/^         ObjectValues *map_;$/;"	m	union:Json::Value::ValueHolder
 map_	include/json/value.h	/^         ValueInternalMap *map_;$/;"	m	struct:Json::ValueInternalMap::IteratorState
 map_	include/json/value.h	/^         ValueInternalMap *map_;$/;"	m	union:Json::Value::ValueHolder
-map_	include/json/value.h	/^         ValueInternalMap::IteratorState map_;$/;"	m	union:Json::ValueIteratorBase::__anon6
+map_	include/json/value.h	/^         ValueInternalMap::IteratorState map_;$/;"	m	union:Json::ValueIteratorBase::__anon7
 maxInt	include/json/value.h	/^      static const Int maxInt;$/;"	m	class:Json::Value
 maxUInt	include/json/value.h	/^      static const UInt maxUInt;$/;"	m	class:Json::Value
 md5File	include/CppJieba/Limonp/Md5.hpp	/^inline bool md5File(const char* filepath, std::string& res)$/;"	f	namespace:Limonp
@@ -714,6 +744,7 @@ mutex_	include/CppJieba/Limonp/BlockingQueue.hpp	/^                mutable Mutex
 mutex_	include/CppJieba/Limonp/Condition.hpp	/^            MutexLock& mutex_;$/;"	m	class:Limonp::Condition
 mutex_	include/CppJieba/Limonp/MutexLock.hpp	/^            MutexLock & mutex_;$/;"	m	class:Limonp::MutexLockGuard
 mutex_	include/CppJieba/Limonp/MutexLock.hpp	/^            pthread_mutex_t mutex_;$/;"	m	class:Limonp::MutexLock
+name	debug/test.cpp	/^string name = str.substr(0,3);$/;"	v
 nextPos	include/CppJieba/MPSegment.hpp	/^        size_t nextPos;$/;"	m	struct:CppJieba::SegmentChar
 next_	include/json/value.h	/^      ValueInternalLink *next_;$/;"	m	class:Json::ValueInternalLink
 noDuplication	include/json/value.h	/^            noDuplication = 0,$/;"	e	enum:Json::Value::CZString::DuplicationPolicy
@@ -727,6 +758,12 @@ null	include/json/value.h	/^      static const Value null;$/;"	m	class:Json::Val
 nullValue	include/json/value.h	/^      nullValue = 0, \/\/\/< 'null' value$/;"	e	enum:Json::ValueType
 numberOfCommentPlacement	include/json/value.h	/^      numberOfCommentPlacement$/;"	e	enum:Json::CommentPlacement
 objectValue	include/json/value.h	/^      objectValue    \/\/\/< object value (collection of name\/value pairs).$/;"	e	enum:Json::ValueType
+offset_path	src/RipeLib_Generator.cpp	/^string offset_path;$/;"	v
+offset_vec	src/RipeLib_Distinctor.cpp	/^vector<pair<int,int> > offset_vec; \/\/ 存放所有的偏移量$/;"	v
+offset_writer	debug/ofs_open_debug.cpp	/^ofstream offset_writer,ofs;$/;"	v
+offset_writer	src/RipeLib_Generator.cpp	/^ofstream ofs,offset_writer;$/;"	v
+ofs	debug/ofs_open_debug.cpp	/^ofstream offset_writer,ofs;$/;"	v
+ofs	src/RipeLib_Generator.cpp	/^ofstream ofs,offset_writer;$/;"	v
 openPool	src/ThreadPool.cpp	/^void ThreadPool::openPool(){$/;"	f	class:ThreadPool
 operator !=	include/json/value.h	/^      bool operator !=( const SelfType &other ) const$/;"	f	class:Json::ValueIteratorBase
 operator *	include/json/value.h	/^      reference operator *() const$/;"	f	class:Json::ValueConstIterator
@@ -741,6 +778,7 @@ operator --	include/json/value.h	/^      SelfType &operator--()$/;"	f	class:Json
 operator --	include/json/value.h	/^      SelfType operator--( int )$/;"	f	class:Json::ValueConstIterator
 operator --	include/json/value.h	/^      SelfType operator--( int )$/;"	f	class:Json::ValueIterator
 operator <	include/Query.h	/^    friend bool operator<(const HeapData4Query& l,const HeapData4Query& r){$/;"	f	class:HeapData4Query
+operator <	src/RipeLib_Distinctor.cpp	/^    friend bool operator<(const Data& lo,const Data& ro){$/;"	f	class:Data
 operator <<	include/CppJieba/DictTrie.hpp	/^    inline ostream & operator << (ostream& os, const DictUnit& unit)$/;"	f	namespace:CppJieba
 operator <<	include/CppJieba/Limonp/ArgvContext.hpp	/^    inline ostream& operator << (ostream& os, const ArgvContext& args)$/;"	f	namespace:Limonp
 operator <<	include/CppJieba/Limonp/Config.hpp	/^    inline ostream& operator << (ostream& os, const Config& config)$/;"	f	namespace:Limonp
@@ -766,8 +804,13 @@ operator const char *	include/json/value.h	/^      operator const char *() const
 pInfo	include/CppJieba/MPSegment.hpp	/^        const DictUnit * pInfo;$/;"	m	struct:CppJieba::SegmentChar
 pageCount_	include/json/value.h	/^      PageIndex pageCount_;$/;"	m	class:Json::ValueInternalArray
 pages_	include/json/value.h	/^      Value **pages_;$/;"	m	class:Json::ValueInternalArray
+parseDocument	src/RipeLib_Generator.cpp	/^void parseDocument(const string& file_path){$/;"	f
+parseStr2Doc	src/RipeLib_Distinctor.cpp	/^Document parseStr2Doc(string& doc_str){$/;"	f
+parseTag	src/RipeLib_Distinctor.cpp	/^string parseTag(const string& doc_str,const char *tag,const char* tag_end){$/;"	f
+parseTitle	src/RipeLib_Generator.cpp	/^bool parseTitle(const string& text,string& title){$/;"	f
 passwd_	include/CppJieba/Limonp/MysqlClient.hpp	/^            const string passwd_;$/;"	m	class:Limonp::MysqlClient
 pcond_	include/CppJieba/Limonp/Condition.hpp	/^            pthread_cond_t pcond_;$/;"	m	class:Limonp::Condition
+pname	debug/test.cpp	/^string* pname = &name;$/;"	v
 pointer	include/json/value.h	/^      typedef Value *pointer;$/;"	t	class:Json::ValueIterator
 pointer	include/json/value.h	/^      typedef const Value *pointer;$/;"	t	class:Json::ValueConstIterator
 pop	include/CppJieba/Limonp/BlockingQueue.hpp	/^                T pop()$/;"	f	class:Limonp::BlockingQueue
@@ -787,6 +830,7 @@ push_back	include/CppJieba/Limonp/LocalVector.hpp	/^                void push_ba
 queue_	include/CppJieba/Limonp/BlockingQueue.hpp	/^                BoundedQueue<T>  queue_;$/;"	m	class:Limonp::BoundedBlockingQueue
 queue_	include/CppJieba/Limonp/BlockingQueue.hpp	/^                std::queue<T>     queue_;$/;"	m	class:Limonp::BlockingQueue
 queue_	include/CppJieba/Limonp/ThreadPool.hpp	/^            BoundedBlockingQueue<ITask*> queue_;$/;"	m	class:Limonp::ThreadPool
+raw_path	src/RipeLib_Generator.cpp	/^string raw_path;$/;"	v
 readFileToMap	src/DictionBuilder.cpp	/^void readFileToMap(const char* filename,CppJieba::MixSegment &seg){$/;"	f
 readLock	include/Lock.h	/^    void readLock(){$/;"	f	class:RWLock
 realValue	include/json/value.h	/^      realValue,     \/\/\/< double value$/;"	e	enum:Json::ValueType
@@ -797,6 +841,7 @@ regeditPool	src/WorkThread.cpp	/^void WorkThread::regeditPool(ThreadPool* p_pool
 reserve	include/CppJieba/Limonp/LocalVector.hpp	/^                void reserve(size_t size) $/;"	f	class:Limonp::LocalVector
 rightMargin_	include/json/writer.h	/^      int rightMargin_;$/;"	m	class:Json::StyledStreamWriter
 rightMargin_	include/json/writer.h	/^      int rightMargin_;$/;"	m	class:Json::StyledWriter
+ripe_lib_path	src/RipeLib_Generator.cpp	/^string ripe_lib_path;$/;"	v
 rtrim	include/CppJieba/Limonp/StringUtil.hpp	/^    inline std::string & rtrim(std::string & s, char x)$/;"	f	namespace:Limonp
 rtrim	include/CppJieba/Limonp/StringUtil.hpp	/^    inline std::string &rtrim(std::string &s) $/;"	f	namespace:Limonp
 run	include/CppJieba/Limonp/ThreadPool.hpp	/^                    virtual void run()$/;"	f	class:Limonp::ThreadPool::Worker
@@ -829,16 +874,13 @@ sset_	include/CppJieba/Limonp/ArgvContext.hpp	/^            set<string> sset_; $
 start	include/CppJieba/Limonp/Thread.hpp	/^            void start()$/;"	f	class:Limonp::IThread
 start	include/CppJieba/Limonp/ThreadPool.hpp	/^            void start()$/;"	f	class:Limonp::ThreadPool
 start	script/excute.sh	/^function start $/;"	f
-start	script/excute.sh~	/^function start $/;"	f
 start	src/Thread.cpp	/^void Thread::start(){$/;"	f	class:Thread
 start_	include/json/reader.h	/^         Location start_;$/;"	m	class:Json::Reader::Token
 startsWith	include/CppJieba/Limonp/StringUtil.hpp	/^    inline bool startsWith(const string& str, const string& prefix)$/;"	f	namespace:Limonp
 stat	script/excute.sh	/^function stat$/;"	f
-stat	script/excute.sh~	/^function stat$/;"	f
 state	include/CppJieba/Limonp/Md5.hpp	/^    UINT4 state[4];                                   \/* state (ABCD) *\/$/;"	m	struct:Limonp::MD5::__context_t
 std	include/CppJieba/Limonp/StdExtension.hpp	/^namespace std$/;"	n
 stop	script/excute.sh	/^function stop$/;"	f
-stop	script/excute.sh~	/^function stop$/;"	f
 str_	include/json/value.h	/^      const char *str_;$/;"	m	class:Json::StaticString
 str_into_vector	include/edit_distance.h	/^bool str_into_vector(const std::string& str,std::vector<uint32_t>& vec){$/;"	f
 strictRoot_	include/json/features.h	/^      bool strictRoot_;$/;"	m	class:Json::Features
@@ -868,6 +910,7 @@ tokenString	include/json/reader.h	/^         tokenString,$/;"	e	enum:Json::Reade
 tokenTrue	include/json/reader.h	/^         tokenTrue,$/;"	e	enum:Json::Reader::TokenType
 token_	include/json/reader.h	/^         Token token_;$/;"	m	class:Json::Reader::ErrorInfo
 traverseDir	src/DictionBuilder.cpp	/^void traverseDir(const char *row_path,CppJieba::MixSegment& seg)$/;"	f
+traverse_dir	src/RipeLib_Generator.cpp	/^void traverse_dir(const std::string & dir)$/;"	f
 trim	include/CppJieba/Limonp/StringUtil.hpp	/^    inline std::string &trim(std::string &s) $/;"	f	namespace:Limonp
 trim	include/CppJieba/Limonp/StringUtil.hpp	/^    inline std::string &trim(std::string &s, char x)$/;"	f	namespace:Limonp
 tryLock	include/Lock.h	/^    void tryLock(){$/;"	f	class:MutexLock
@@ -879,7 +922,7 @@ uintValue	include/json/value.h	/^      uintValue,     \/\/\/< unsigned integer v
 uint_	include/json/value.h	/^         UInt uint_;$/;"	m	union:Json::Value::ValueHolder
 uniCh	include/CppJieba/MPSegment.hpp	/^        uint16_t uniCh;$/;"	m	struct:CppJieba::SegmentChar
 unicodeToUtf8	include/CppJieba/Limonp/StringUtil.hpp	/^    bool unicodeToUtf8(Uint16ContainerConIter begin, Uint16ContainerConIter end, string& res)$/;"	f	namespace:Limonp
-unknown	include/json/value.h	/^      enum { unknown = (unsigned)-1 };$/;"	e	enum:Json::ValueAllocator::__anon3
+unknown	include/json/value.h	/^      enum { unknown = (unsigned)-1 };$/;"	e	enum:Json::ValueAllocator::__anon4
 unlock	include/CppJieba/Limonp/MutexLock.hpp	/^            void unlock()$/;"	f	class:Limonp::MutexLock
 unlock	include/Lock.h	/^    void unlock(){$/;"	f	class:MutexLock
 unlock	include/Lock.h	/^    void unlock(){$/;"	f	class:RWLock
@@ -902,6 +945,7 @@ worker_	include/CppJieba/Limonp/Thread.hpp	/^            static void * worker_(v
 workking	src/WorkThread.cpp	/^void WorkThread::workking(){$/;"	f	class:WorkThread
 writeLock	include/Lock.h	/^    void writeLock(){$/;"	f	class:RWLock
 writeToString	include/CppJieba/Limonp/Md5.hpp	/^  void writeToString()$/;"	f	class:Limonp::MD5
+write_doc_to_file	src/RipeLib_Generator.cpp	/^void write_doc_to_file(const string& url,const string& title,const string& content){$/;"	f
 yamlCompatiblityEnabled_	include/json/writer.h	/^      bool yamlCompatiblityEnabled_;$/;"	m	class:Json::FastWriter
 ~ArgvContext	include/CppJieba/Limonp/ArgvContext.hpp	/^            ~ArgvContext(){};$/;"	f	class:Limonp::ArgvContext
 ~BoundedQueue	include/CppJieba/Limonp/BoundedQueue.hpp	/^                ~BoundedQueue(){}$/;"	f	class:Limonp::BoundedQueue

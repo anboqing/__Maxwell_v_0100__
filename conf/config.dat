@@ -1,4 +1,4 @@
-HOME_PATH /home/anboqing/Code/CASES/Maxwell/
+HOME_PATH /home/anboqing__/Code/CASES/Maxwell/
 # 日志文件路径
 LOG_PATH log/log.dat
 # 停用词排除集路径
@@ -12,3 +12,11 @@ MY_DICT_PATH dict/mydict.dat
 RAW_PATH rawdata/
 # 索引地址
 INDEX_PATH dict/index.dat
+# 原始文本库地址
+RIPE_LIB_PATH dict/ripepage_lib.dat
+# 原始文本偏移地址
+RIPE_LIB_OFFSET_PATH dict/ripe_offset.dat
+# 去重后文本库地址
+NEW_RIPE_LIB_PATH dict/new_ripepage_lib.dat
+# 去重后文本偏移地址
+NEW_RIPE_LIB_OFFSET_PATH dict/new_ripe_offset.dat
