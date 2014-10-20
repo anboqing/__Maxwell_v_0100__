@@ -7,17 +7,6 @@
 
 // g++ -o ../bin/RipeLib_Distinctor RipeLib_Distinctor.cpp Configure.cpp  -lpthread -I../include -std=c++11 -DLOGLEVER=LOG_ERROR 
 
-// 文档去重复
-
-// 语义指纹的生成:
-// 将 每个文档分词表示成基于词的特征向量，使用TF作为每个特征项的权值
-// 将特征词按照权值排序
-// 选出最能区分文章的前5个词(堆)
-// 然后重新按照字符排序
-// 将这些词连接起来作为指纹，计算lcs，将lcs大于阀值的文章去掉
-// 调用md5算法，将每个特征项转化为一个128位的串，作为该文档的指纹。(这种方法不好，很难识别出很相似的文章)
-
-
 #include "../include/Document.h"
 #include "../include/Configure.h"
 #include "../include/CppJieba/HMMSegment.hpp"
@@ -60,6 +49,7 @@ bool build_offsets_vec(){
         }
         offset_vec.push_back(make_pair(offset,length));
     }
+    offset_reader.close();
     return true;
 }
 
@@ -112,6 +102,7 @@ bool build_document_vec(){
         doc_vec.push_back(parseStr2Doc(doc_str));
         delete[] buf;
     }
+    ripe_reader.close();
     return true;
 }
 
@@ -257,7 +248,7 @@ int main(){
 #ifdef DEBUG
     cout << "build_document_vec complete ..."<< endl;
 #endif
-    // 读取听用词表
+    // 读取停用词表
     build_exclude_set();
 #ifdef DEBUG
     cout << "build_exclude_set complete ..."<< endl;
@@ -292,4 +283,7 @@ int main(){
         exit(EXIT_FAILURE);
     }
     build_new_ripepagelib();
+    ofs.close();
+    offset_writer.close();
+    return EXIT_SUCCESS;
 }

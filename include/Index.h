@@ -14,6 +14,7 @@
 #include "Lock.h"
 #include "Uncopyable.h"
 
+// 这是文本纠错用的索引
 class Index:public Uncopyable{
 public:
     // unordered_map 是 c++ 11 对 hashmap的实现 
