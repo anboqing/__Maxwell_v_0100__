@@ -5,8 +5,8 @@
   > Created Time: Mon 20 Oct 2014 04:45:39 PM CST
  ************************************************************************/
 
+//g++ -o ../bin/DocIndexGenerator.out DocIndexGenerator.cpp Configure.cpp -I../include/ -lpthread -std=c++11 -DLOGGER_LEVEL=LL_ERROR
 #include<iostream>
-
 using namespace std;
 
 #include "../include/CleanGBKToken.hpp"
@@ -16,6 +16,9 @@ using namespace std;
 #include "../include/CppJieba/HMMSegment.hpp"
 #include "../include/CppJieba/MixSegment.hpp"
 
+#include <assert.h>
+#include <unistd.h> // pause();
+#include <cmath>
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
@@ -120,7 +123,7 @@ void build_exclude_set(){
     ifs.close();
 }
 
-bool getTermFrequency(Document& doc,map<string,float>& doc_map,CppJieba::MixSegment& seg){
+bool getTermFrequency(Document& doc,map<string,double>& doc_map,CppJieba::MixSegment& seg){
     string& content = doc._content;
     if( !(content.empty()) ){
         vector<string> vec_words;
@@ -142,27 +145,95 @@ bool getTermFrequency(Document& doc,map<string,float>& doc_map,CppJieba::MixSegm
         // 计算 term_frequency
         vector<string>::size_type size = vec_words.size();
         for(auto& pair:doc_map){
-            pair.second /= size;
+            pair.second /= static_cast<double>(size);
         }
         return true;
     }
     return false;
 }
 
-unordered_map<string,set<pair<size_t,float> > > _index_hash_map;
+// 词语1  docid1:weight  docid3:weight ......
+// 词语2  docid8:weight  docid5:weight ......
+unordered_map<string,map<size_t,double> > _index_hash_map;
+unordered_map<string,map<size_t,double> > _index_hash_map_idf;
+unordered_map<string,map<size_t,double> > _index_hash_map_weight;
 
 void build_inverse_index(CppJieba::MixSegment &seg){
     // 建立倒排索引 
     for(vector<Document>::size_type ix = 0 ; ix != doc_vec.size() ; ++ ix){
-        map<string,float> doc_map;
+        map<string,double> doc_map;
         // 对每篇文章 ： 求每个词的tf
         if(getTermFrequency(doc_vec[ix],doc_map,seg)){
             // 然后把本文章的map 合并到_index_hash_map中去
             for(auto& pair : doc_map){
+                assert(pair.second > 0);
                 _index_hash_map[pair.first].insert(make_pair(ix,pair.second));
             }
         }
     }
+#ifdef DEBUG
+    cout << "tf .. done... " << endl;
+#endif
+    // 第二遍 遍历 : 算 inverse document frequency;
+    // IDF = log( (文档总数)/(1+包含该词的文档数目) )
+    // 文档总数 ： doc_vec.size()
+    // 包含该词的文档数目 : _index_hash_map 中 map.size()
+    const size_t DOC_NUM = doc_vec.size();
+    assert(DOC_NUM>0);
+    for(auto& word_indexmap:_index_hash_map){
+        // 求 TF * IDF
+        double doc_occurence = static_cast<double>(word_indexmap.second.size());
+        double idf = static_cast<double>(log( static_cast<double>(DOC_NUM) / (1+doc_occurence)));
+#ifdef DEBUG
+        //  idf has the chance to be negtive , see << the beauty of math>> ;
+        if(idf < 0){
+            cout<< " ---------------------- " << DOC_NUM/(1+doc_occurence) << " " << DOC_NUM << " " << 1+doc_occurence << endl;
+        }
+#endif
+        // 求出idf 后 和 tf 相乘 得出  未归一化的  权重 
+        map<size_t,double>  index_weight_map;
+        for(map<size_t,double>::iterator iter = word_indexmap.second.begin(); iter!=word_indexmap.second.end();++iter){
+            size_t index = iter->first;
+            double weight = static_cast<double>((iter->second) * idf);
+            if(weight > 0){
+                index_weight_map.insert(make_pair(index,weight));
+            }else{
+#ifdef DEBUG
+            cout << " weight " << weight << " doc index " << index <<endl;
+#endif
+            }
+        }
+        _index_hash_map_idf.insert(make_pair(word_indexmap.first,index_weight_map)); 
+    }
+#ifdef DEBUG
+    cout << " idf * tf ...done .. ." << endl;
+#endif
+    // 第三遍遍历 对权重进行归一化
+    //  先计算每篇文章的权重和 存起来
+    
+    map<size_t,double> docid_weight_map; // docid,weight
+    for(auto& word_indexset : _index_hash_map_idf){
+        for(auto& id_weight : word_indexset.second){
+             docid_weight_map[id_weight.first] += id_weight.second;
+        }
+    }
+#ifdef DEBUG
+    cout << " weight sum  ... done ... " << endl;
+#endif
+    // 再把_index_hash_map中的权重值归一化
+    for(auto& word_indexmap : _index_hash_map_idf){
+        map<size_t,double> temp_map;
+        for(auto& id_weight : word_indexmap.second){
+            double sum_weight = docid_weight_map.find(id_weight.first)->second;
+            assert(sum_weight>0);
+            double weight =  static_cast<double>(id_weight.second / sum_weight);
+            temp_map.insert(make_pair(id_weight.first,weight));
+        }
+        _index_hash_map_weight.insert(make_pair(word_indexmap.first,temp_map));
+    }
+#ifdef DEBUG
+    cout << "  ... done ... " << endl;
+#endif
 }
 
 void write_index_to_file(){
@@ -172,7 +243,7 @@ void write_index_to_file(){
     if(!index_writer.is_open()){
         throw runtime_error("打不开倒排文件");
     }
-    for(auto& pair : _index_hash_map){
+    for(auto& pair : _index_hash_map_weight){
         index_writer << pair.first << " ";
         for(auto& idxpr:pair.second){
             index_writer << idxpr.first << " " << idxpr.second << " " ;   

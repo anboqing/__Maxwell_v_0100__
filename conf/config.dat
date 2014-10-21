@@ -21,4 +21,4 @@ NEW_RIPE_LIB_PATH dict/new_ripepage_lib.dat
 # 去重后文本偏移地址
 NEW_RIPE_LIB_OFFSET_PATH dict/new_ripe_offset.dat
 # 倒排索引地址
-DOC_INDEX_PATH dict/inserse_index.idx
+DOC_INDEX_PATH dict/inverse_index.idx

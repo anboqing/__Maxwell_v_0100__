@@ -2,4 +2,6 @@
 /rawdata/
 *.txt
 *.out
+/dict/
+*.dat
 
