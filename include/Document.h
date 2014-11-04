@@ -11,22 +11,30 @@
 //这个类用来表示一个文档对象
 class Document{
 public:
+    Document(){}
     Document(size_t id,const std::string& url,
             const std::string& title,const std::string& content):
         _docid(id),_url(url),_title(title),_content(content){
         }
-    /*size_t getDocId()const{*/
-        //return _docid;
-    //}
-    //const std::string& getDocUrl()const{
-        //return _url;
-    //}
-    //const std::string& getDocTitle()const{
-        //return _title;
-    //}
-    //const std::string& getDocContent()const{
-        //return _content;
-    /*}*/
+    size_t getDocId()const{
+        return _docid;
+    }
+    const std::string& getDocUrl()const{
+        return _url;
+    }
+    const std::string& getDocTitle()const{
+        return _title;
+    }
+    const std::string& getDocContent()const{
+        return _content;
+    }
+    Document& operator=(const Document& doc){
+        _docid = doc._docid;
+        _url = doc._url;
+        _title = doc._title;
+        _content = doc._content;
+        return *this;
+    }
     size_t _docid;
     std::string _url;
     std::string _title;

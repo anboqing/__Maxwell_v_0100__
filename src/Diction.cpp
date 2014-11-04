@@ -34,7 +34,7 @@ Diction* Diction::getInstance(){
     return _s_p_instance;
 }
 
-Diction::Diction():_dict_vec(){
+Diction::Diction():_dict_map(){
     if(!loadDiction()){
         _LogError("load Diction Error");
         exit(EXIT_FAILURE);
@@ -77,12 +77,12 @@ bool Diction::loadDiction(){
 #endif
             return false;
         }
-        _dict_vec.push_back(make_pair(key_word,frequency));
+        _dict_map.insert(make_pair(key_word,frequency));
     }
     ifs.close();
     return true;
 }
 
-Diction::_DICT_VEC_TYPE& Diction::getDictionVec(){
-    return _dict_vec;
+Diction::_DICT_MAP_TYPE& Diction::getDictionMap(){
+    return _dict_map;
 }

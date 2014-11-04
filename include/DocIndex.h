@@ -17,10 +17,10 @@
 
 class DocIndex:public Uncopyable{
 public:
-    typedef std::unordered_map<std::string,std::set<std::pair<size_t,int> > > _DOC_INDEX_MAP_TYPE;
+    typedef std::unordered_map<std::string,std::unordered_map<size_t,double> > _DOC_INDEX_MAP_TYPE;
     static DocIndex* getInstance();
     _DOC_INDEX_MAP_TYPE& getIndexMap();
-    bool getIndexes(const std::string&,std::set<std::pair<size_t,int> >& );
+    bool getIndexes(const std::string&,std::unordered_map<size_t,double> & );
 private:
     DocIndex();
     ~DocIndex();

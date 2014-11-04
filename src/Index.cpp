@@ -70,7 +70,7 @@ Index::_INDEX_MAP_TYPE& Index::getIndexMap(){
     return _index_hashmap;
 }
 
-bool Index::getIndexes(const std::string& keyword,std::set<size_t>& result_set){
+bool Index::getIndexes(const std::string& keyword,set<size_t>& result_set){
     // 返回查询词对应的索引存入set中
     _INDEX_MAP_TYPE::iterator res_iter;
     if((res_iter=_index_hashmap.find(keyword))==_index_hashmap.end()){

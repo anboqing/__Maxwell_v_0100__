@@ -49,19 +49,19 @@ bool DocIndex::loadIndex(){
         return false;
     }
     string key_word;
-    set<pair<size_t,int> > indexes_set;
+    unordered_map<size_t,double> indexes_map;
     string line;
     while(getline(index_reader,line)){
         key_word.clear();
-        indexes_set.clear();
+        indexes_map.clear();
         istringstream line_parser(line);
         line_parser >> key_word;
         size_t index;
-        int frequency;
-        while(line_parser>> index && line_parser>> frequency){
-            indexes_set.insert(make_pair(index,frequency));
+        double weight;
+        while(line_parser>> index && line_parser>> weight){
+            indexes_map.insert(make_pair(index,weight));
         }
-        _index_hash_map.insert(make_pair(key_word,indexes_set));
+        _index_hash_map.insert(make_pair(key_word,indexes_map));
     }
     index_reader.close();
     return true;
@@ -71,16 +71,16 @@ DocIndex::_DOC_INDEX_MAP_TYPE& DocIndex::getIndexMap(){
     return _index_hash_map;
 }
 
-bool DocIndex::getIndexes(const std::string& keyword,std::set<pair<size_t,int> >& result_set){
+bool DocIndex::getIndexes(const std::string& keyword,std::unordered_map<size_t,double>& result_map){
     _DOC_INDEX_MAP_TYPE::iterator res_iter;
     if( (res_iter = _index_hash_map.find(keyword)) == _index_hash_map.end() ){
         // 没找到
         return false;
     }
-    set<pair<size_t,int> >& result = (*res_iter).second;
+    unordered_map<size_t,double>& result = res_iter->second;
     // 这里不能直接赋值，要append到结果set里面
     for(auto& pair: result){
-        result_set.insert(pair);
+        result_map.insert(pair);
     }
     return true;
 }

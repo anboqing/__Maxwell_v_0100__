@@ -1,66 +1,259 @@
 /*************************************************************************
-	> File Name: ../src/Query.cpp
-	> Author: HunkAnn
-	> Mail: hunkann@gmail.com 453775948@qq.com 
-	> Created Time: 2014年10月09日 星期四 22时00分10秒
+  > File Name: Query.cpp
+  > Author: HunkAnn
+  > Mail: hunkann@gmail.com 453775948@qq.com 
+  > Created Time: Wed 22 Oct 2014 09:06:26 AM CST
  ************************************************************************/
-#include "../include/Query.h"
-#include "../include/Index.h"
-#include "../include/string_tools.h"
-#include "../include/Diction.h"
-#include "../include/edit_distance.h"
+
 #include "../include/Log.hpp"
-#include <queue>
+#include "../include/Query.h"
+#include "../include/CppJieba/HMMSegment.hpp"
+#include "../include/CppJieba/MixSegment.hpp"
+#include "../include/Configure.h"
+#include <algorithm>
+#include "../include/Diction.h"
+#include "../include/json/json.h"
 
 using namespace std;
 
-Query::Query(){}
-Query::~Query(){}
-void Query::getSimWords(const string& keyword,Query::_RESULT_VEC_TYPE& res_vec){
-    /* 从索引中查找 
-     * 1. 把关键词切分成单个汉字或字母存入一个vector<string>
-     * 2. 在索引中查找每个字在索引中的下标，并把本关键词的所有字的索引项存起来set<size_t>，这样就可以通过set中的下标找到该单词在词库中对应的词（候选词）
-     * 3. 计算关键词和所有候选词的编辑距离，并且把计算结果加入小根堆中，建堆的时候按照编辑距离建堆，这样堆的最顶端一直是编辑距离最小的候选词，也就是和关键词最相近的候选词
-    */    
-    priority_queue<HeapData4Query> small_root_heap;
-    // @_1
-    vector<string> keyword_letter_vec; // 存储关键词分出来的单个字
-    splitIntoLetters(keyword,keyword_letter_vec);
-#ifdef DEBUG
-    _LogDebug("keyword_letter_vec.size() %d ",keyword_letter_vec.size());
-#endif
-    // 获取索引数据
-    Index* p_index = Index::getInstance();
-    set<size_t> indexes_set; // 存储所有候选词在词典中的下标
-    // @_2.查索引
-    for(auto& aletter : keyword_letter_vec){
-        // 查每个单字在索引中的索引,存到下标集合中
-        p_index->getIndexes(aletter,indexes_set);
+vector<Document> _doc_vec;
+vector<pair<int,int> > _offset_vec;
+
+Query* Query::_s_p_instance = NULL;
+MutexLock* Query::_s_lock = new MutexLock();
+DocIndex* Query::_inverted_index = NULL;
+// 把输入的字符串分词 并统计词频
+Configure* pconf = Configure::getInstance();
+string hmm_dict_path = pconf->getConfigByName("HMM_DICT_FILE");
+string jieba_dict_path = pconf->getConfigByName("JIEBA_DICT_FILE");
+CppJieba::MixSegment seg(jieba_dict_path,hmm_dict_path); 
+
+void parse_query_string(const string& query_str,unordered_map<string,double>& query_wd_wgt_map){
+    vector<string> word_vec;
+    // 切词
+    seg.cut(query_str,word_vec);
+    // 统计词频
+    map<string,int> fq_map;
+    for(auto& word:word_vec){
+       ++fq_map[word];
     }
-#ifdef DEBUG
-    _LogDebug("index_set.size() %d ",indexes_set.size());
-#endif
-    // 准备词库
-    Diction* p_diction = Diction::getInstance();
-    Diction::_DICT_VEC_TYPE& diction_vec = p_diction->getDictionVec();
-    //@_3
-    for(auto& index : indexes_set){
-        // 遍历每个下标，取出词库中对应下标的词，逐一和查询词计算编辑距离
-        // 结果存入 优先级队列（小根堆）中
-        string& candidite = diction_vec[index].first;
-        // 计算编辑距离
-        int distance = getEditDistance(candidite,keyword);
-        // 构造优先级队列的数据元素并存储（建堆）
-        HeapData4Query data(distance,index);
-        small_root_heap.push(data);
+    // 存储结果到输出参数
+    vector<string>::size_type size = word_vec.size();
+    for(auto& wd_fr:fq_map){
+       query_wd_wgt_map.insert(make_pair(wd_fr.first,static_cast<double>((double)wd_fr.second/(double)size)));
     }
+}
+
+void get_inverted_map(unordered_map<string,double>& query_words_udmap,
+        DocIndex* p_index,
+        unordered_map<string,unordered_map<size_t,double> >& result_map,
+        set<size_t>& docids){
+    // 在倒排索引中取出所有查询词的倒排
+    for(auto& word_frequency : query_words_udmap){
+        unordered_map<size_t,double> word_index_temp;
+        bool flag = p_index->getIndexes(word_frequency.first,word_index_temp);
+        if(!flag){
+            _LogError("找不到该单词的倒排表");
+            return ;
+        }
+        for(auto& pair : word_index_temp ){
+            result_map[word_frequency.first].insert(pair);
+            docids.insert(pair.first);
+        }
+    }
+}
+
+void get_doc_vec(
+        unordered_map<std::size_t, std::unordered_map<std::string, double> >& doc_vec_map,
+        unordered_map<std::string, std::unordered_map<std::size_t, double> >& inverted_map, // TODO 倒排表不对
+        set<size_t>& docids){
+    // docid  --> word(查询词),fre 
+    for(auto & word_idfre : inverted_map){
+        for(auto& id_fre : word_idfre.second){
+            if(docids.count(id_fre.first)!=0){
+                // id在并集中
+                doc_vec_map[id_fre.first].insert(make_pair(word_idfre.first,id_fre.second));
+            }
+        }
+    }
+}
+
+void get_query_words_vec(unordered_map<string,double>& query_words_udmap,unordered_map<string,double>& word_weight,size_t doc_num){
+    float sum = 0.0f;
+    Diction* pdict = Diction::getInstance();
+    Diction::_DICT_MAP_TYPE& dict = pdict->getDictionMap();
+    for (auto& word_frequency : query_words_udmap)
+    {
+        double tf = word_frequency.second;
+        double df = dict[word_frequency.first];
+        double idf = (double)log2((double)doc_num / (1+df));
+        double weight = (double)tf * idf;
+        word_weight.insert(make_pair(word_frequency.first, weight));
+        sum += weight; 
+    }
+    // 归一化
+    for (auto &x : word_weight)
+    {
+        x.second = x.second / sum;
+    }
+}
+
+void compute_similarity(unordered_map<string,double>& word_weight_map, // 查询向量
+        unordered_map<size_t,unordered_map<string,double> > &doc_vec_map,// 文档向量
+        multimap<double,size_t>& docid_map){ // 结果
+    for (auto& id_wordweight : doc_vec_map){
+        double ret = 0.0f;
+        for (auto& word_weight : word_weight_map){
+            ret += word_weight.second * id_wordweight.second[word_weight.first];
+        }
+        docid_map.insert(make_pair(ret, id_wordweight.first));
+    }
+}
+
+string docs_to_json(vector<Document>& docs){
+    Json::Value root;
+    Json::Value arr;
+    int cnt = 0;
+    for (auto x : docs)
+    {
+        Json::Value elem;
+        elem["title"] = x._title;
+        elem["summary"] = x._content;
+        arr.append(elem);
+    }
+    root["docs"] = arr;
+    Json::FastWriter writer;
+    Json::StyledWriter stlwriter;
+
+    return stlwriter.write(root);	
+} 
+
+void read_doc(multimap<double,size_t>& docid_map // 存储　相似度　
+        ,vector<Document>& docs){
+    for(multimap<double,size_t>::reverse_iterator iter = docid_map.rbegin();iter!=docid_map.rend();++iter){
+        // 取出文档
+        docs.push_back(_doc_vec[iter->second]);
 #ifdef DEBUG
-    _LogDebug("small_root_heap.size() %d ",small_root_heap.size());
+        break;
 #endif
-    // 把优先级队列的前 top_k 个词作为结果返回
-    int count = 4;
-    while(count--&&!small_root_heap.empty()){
-        res_vec.push_back(diction_vec[small_root_heap.top()._index]);
-        small_root_heap.pop();
+    }
+}
+
+std::string Query::query(const std::string & query_str)
+{
+    //对查询字符串分词并统计词频
+    std::unordered_map<std::string, double>  query_words_udmap;
+    parse_query_string(query_str, query_words_udmap);
+    // 在倒排索引中取出 每个词 的索引项
+    std::unordered_map<std::string, std::unordered_map<std::size_t, double> > inverted_map;
+    set<size_t> docids;
+    get_inverted_map(query_words_udmap,_inverted_index,inverted_map,docids);
+    //获取倒排表交集中文档的特征向量
+    // docid --> word,weight word,weight ... 
+    std::unordered_map<std::size_t, std::unordered_map<std::string, double> > doc_vec_map;
+    get_doc_vec(doc_vec_map,inverted_map,docids);
+    //获取查询词的特征向量
+    std::unordered_map<std::string, double> word_weight;
+    get_query_words_vec(query_words_udmap, word_weight,_doc_vec.size());
+    //计算查询词和筛选出的每篇文档的相关性
+    std::multimap<double, std::size_t> docid_map;
+    compute_similarity(word_weight, doc_vec_map, docid_map);
+    //根据最终排序结果，读取文档
+    std::vector<Document> docs;
+    read_doc(docid_map, docs);
+#ifdef DEBUG
+    cout << " 查出来了"<<  docs.size()<< "篇文章" << endl;
+#endif
+    string ret = docs_to_json(docs);
+    return ret;
+}
+
+
+bool build_offsets_vec(vector<pair<int,int> >& _offset_vec){
+    Configure* pconf = Configure::getInstance();
+    string offset_path = pconf->getConfigByName("NEW_RIPE_LIB_OFFSET_PATH"); ifstream offset_reader; offset_reader.open(offset_path.c_str());
+    if(!offset_reader.is_open()){
+        perror("read_offset_2_vec");
+        return false;
+    }
+    string line;
+    while(getline(offset_reader,line)){
+        int offset,length;
+        istringstream ls(line);
+        if(!( ls >> offset && ls >> length )){
+            perror("偏移文件格式错误");
+            return false;
+        }
+        _offset_vec.push_back(make_pair(offset,length));
+    }
+    offset_reader.close();
+    return true;
+}
+
+string parseTag(const string& doc_str,const char *tag,const char* tag_end){
+    size_t beg = string::npos , end = string::npos;
+    if( ((beg = doc_str.find(tag)) != string::npos)
+            && ((end = doc_str.find(tag_end)) != string::npos)){
+        beg+=strlen(tag); // 将游标移动到正确位置
+        size_t len = end-beg;
+        string temp(doc_str,beg,len);
+        return temp;
+    }else{
+        _LogError("解析文档错误: tag %s tag end %s ",tag,tag_end);
+        return string();
+    }
+}
+
+static int doc_id = 0;
+
+Document parseStr2Doc(string& doc_str){
+    // 把 <doc> <docid></docid><url></url><title></title><content></content></doc>中的内容解析出来
+    string url,title,content;
+    url = parseTag(doc_str,"<url>","</url>");
+    title = parseTag(doc_str,"<title>","</title>");
+    content = parseTag(doc_str,"<content>","</content>");
+    return *(new Document(doc_id++,url,title,content));
+}
+
+bool build_document_vec(vector<Document>& _doc_vec,vector<pair<int,int> >& _offset_vec){
+    Configure* pconf = Configure::getInstance();
+    string ripe_path = pconf->getConfigByName("NEW_RIPE_LIB_PATH");
+    ifstream ripe_reader;
+    ripe_reader.open(ripe_path.c_str());
+    if(!ripe_reader.is_open() ){
+        _LogError("open %s failed",ripe_path.c_str());
+        return false;
+    }
+    if(!build_offsets_vec(_offset_vec)){
+        _LogError("build Offset vec error");
+        return false;
+    }
+    // 读取偏移量vector 找出每篇文章的起始位置
+    // 从RipePageLib中读解析出所有的Document 存入vector
+    for(auto& pair : _offset_vec){
+        ripe_reader.seekg(pair.first,ripe_reader.beg);   
+        char *buf = new char[pair.second+1];
+        bzero(buf,pair.second+1);
+        ripe_reader.read(buf,pair.second);
+        string doc_str(buf);
+        _doc_vec.push_back(parseStr2Doc(doc_str));
+        delete[] buf;
+    }
+    ripe_reader.close();
+    return true;
+}
+
+Query::Query(){
+    // 加载倒排表
+    _inverted_index = DocIndex::getInstance();
+    build_document_vec(_doc_vec,_offset_vec);
+}
+
+Query* Query::getInstance(){
+    if(_s_p_instance == NULL){
+        LockSafeGuard raii(*_s_lock);
+        if(_s_p_instance == NULL){
+            _s_p_instance = new Query();
+        }
     }
 }

@@ -6,7 +6,7 @@
  ************************************************************************/
 #ifndef _DICTION_H_
 #define _DICTION_H_
-#include <vector>
+#include <map>
 #include <string>
 
 #include "Uncopyable.h"
@@ -17,16 +17,16 @@
  */
 class Diction:public Uncopyable{
 public:
-    typedef std::vector<std::pair<std::string,size_t> > _DICT_VEC_TYPE;
+    typedef std::map<std::string,size_t> _DICT_MAP_TYPE;
     static Diction* getInstance();
-    _DICT_VEC_TYPE& getDictionVec();
+    _DICT_MAP_TYPE& getDictionMap();
 private:
     Diction();
     ~Diction();
     //从词典文件中读取数据到内存
     bool loadDiction();
     //存放词典的
-    _DICT_VEC_TYPE _dict_vec;
+    _DICT_MAP_TYPE _dict_map;
     static Diction* _s_p_instance;
     static MutexLock* _p_lock;
 };

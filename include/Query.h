@@ -2,45 +2,45 @@
 	> File Name: Query.h
 	> Author: HunkAnn
 	> Mail: hunkann@gmail.com 453775948@qq.com 
-	> Created Time: 2014年10月09日 星期四 21时17分27秒
+	> Created Time: Wed 22 Oct 2014 09:01:45 AM CST
  ************************************************************************/
+
 #ifndef _QUERY_H_
 #define _QUERY_H_
 
-#include <set>
-#include <string>
-#include <unordered_map> // std::unordered_map
-#include <vector>   // std::vector
-#include <utility> // std:: pair
-
 #include "Uncopyable.h"
+#include "Lock.h"
+#include "DocIndex.h"
+#include "Document.h"
+#include <string>
+#include <unordered_map>
+#include <map>
+#include <vector>
+#include "CppJieba/HMMSegment.hpp"
+#include "CppJieba/MixSegment.hpp"
 
-class HeapData4Query{
+class ResData{
+// 用来对计算出的文档的相似度进行排序
 public:
-    HeapData4Query(int dis,int index):_distance(dis),_index(index){}
-    friend bool operator<(const HeapData4Query& l,const HeapData4Query& r){
-        if(l._distance==r._distance){
-            return false;
-        }
-        return l._distance > r._distance;
+    ResData(double s,std::size_t id):_simi(s),_docid(id){}
+    double _simi;
+    std::size_t _docid;
+    friend bool operator<(const ResData& lo,const ResData& lr){
+        return lo._simi > lr._simi;
     }
-    int _distance;
-    int _index;
 };
 
-// 本类用来实现在 缓存 索引 词典中进行查询的功能
 class Query:public Uncopyable{
 public:
-    //定义一个结果集的类型
-    typedef std::vector<std::pair<std::string,int> > _RESULT_VEC_TYPE;
-
+    // 查询并获取结果集合的json字符串
+    std::string query(const std::string& );
+    static Query* getInstance();
+private:
     Query();
     ~Query();
-
-    // 查询函数
-    static void getSimWords(const std::string& keyword,_RESULT_VEC_TYPE&);
-private:
-
+    static Query* _s_p_instance;
+    static MutexLock* _s_lock;
+    static DocIndex* _inverted_index;
 };
 
 #endif
